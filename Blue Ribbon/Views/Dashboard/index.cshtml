@@ -1,0 +1,288 @@
+﻿@model  Blue_Ribbon.Models.Customer
+@{
+
+    ViewBag.Title = "Dashboard";
+    ViewBag.Name = Model.FullName;
+    ViewBag.Email = Model.Email;
+}
+
+
+    <div class="mainContent">
+        <div class="product-top">
+            <h3>Welcome @Model.FullName! - Your Dashboard</h3>
+
+            <p>Amazon Profile ID: @User.Identity.Name</p>
+            <strong>@Html.ActionLink("Reviewer Guide", "Welcome", "Dashboard", new { @class = "btn btn-primary" })</strong>
+
+            <a data-target="#help-modal" role="button" data-toggle="modal" id="help-modal-button" class="btn btn-default">Contact Help Desk</a>
+            <div class="modal fade" id="help-modal">
+                <div class="modal-dialog help-modal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button class="close" data-dismiss="modal">&times;</button>
+                            <h4>Contact Help Desk</h4>
+                        </div>
+                        <div class="modal-body" style="color:#444">
+                            <div id="helpform">
+                                @Html.Action("GetFormPartial", new { email = Model.Email, name = Model.FullName })
+                            </div>
+                            <div id="loadingmessage">
+                                Sending Message - Please Wait: <img src='~/images/loading.gif' />
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-warning" id="contactformsubmit">Send Message</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            @*<div class="col-lg-4">
+                <h4>Status Level:</h4>
+                <img src="~/images/Beginner.png" alt="badge" />
+                <p>You need 4 more reviews to reach the next level</p>
+                <div class="progress">
+
+                    <div class="progress-bar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width:20%">
+                        <span class="sr-only">20% Complete</span>
+                    </div>
+                </div>
+            </div>*@
+
+        </div>
+
+        <div class="col-sm-12">
+            <ul class="nav nav-tabs row" role="tablist">
+                <li role="presentation" class="active"><a href="#OpenReviews" aria-controls="OpenReviews" role="tab" data-toggle="tab">Open Reviews</a></li>
+                <li role="presentation"><a href="#CompletedReviews" aria-controls="CompletedReviews" role="tab" data-toggle="tab">Completed Reviews</a></li>
+                <li role="presentation"><a href="#OpenRequests" aria-controls="OpenRequests" role="tab" data-toggle="tab">Product Requests</a></li>
+
+            </ul>
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane fade in active" id="OpenReviews">
+                    <div class="col-xs-12">
+
+                        <div class="alert alert-warning review-alert col-xs-12" id="dash-content" role="alert">
+                            <div class="col-xs-12 dashboard-tab-description">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        These are the items you have agreed to review. Please copy the following text into all reviews.
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <textarea readonly class="reviewdisclaimer">I received this product discounted in exchange for my honest and unbiased review.</textarea>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12">
+                            <div class="row">
+
+
+                                @foreach (var item in Model.Reviews)
+                                {
+                                    var overdue = DateTime.Compare(item.DueDate, DateTime.Now.Date); if (item.Reviewed == false)
+                                    {
+                                        <div class="col-sm-12 col-md-8 col-lg-4 dashpanel">
+                                            @if (!string.IsNullOrEmpty(item.CustomerAlert))
+                                            {
+                                                <div class="alert alert-danger">
+                                                    @item.CustomerAlert
+                                                </div>
+
+                                            }
+                                            <div class="panel revieweditempanel">
+                                                <div class="panel-heading">
+                                                    <div class="panel-title">
+                                                        @item.Campaign.ASIN<br />
+                                                        <a data-toggle="tooltip" data-placement="bottom" title="@item.Campaign.Name">@item.Campaign.Name</a>
+                                                    </div>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <div class="reviewimage">
+                                                        <img src=@item.Campaign.ImageUrl />
+                                                    </div>
+                                                    <p>
+                                                        Your review is due by: @item.DueDate.ToShortDateString()
+                                                    </p>
+                                                    @if (overdue <= 0)
+                                                    { <div class="overdue">REVIEW OVERDUE!<br /> Please review immediately.</div> }
+                                                    <hr />
+                                                    @if (item.DiscountCode == null)
+                                                    {
+                                                        <p class="discountcode">
+                                                            Discount Code:<br /><div class="codedisplay">Not Available: Please check later.</div>
+                                                        </p>
+
+                                                    }
+                                                    else
+                                                    {
+                                                        <p class="discountcode">
+                                                            Use Discount Code:<br /><div class="codedisplay">@item.DiscountCode</div>
+                                                        </p>
+                                                    }
+                                                    <p>
+                                                        @if (!String.IsNullOrEmpty(item.Campaign.VendorsPurchaseURL))
+                                                        {
+                                                            <a href="@item.Campaign.VendorsPurchaseURL" target="_blank" class="btn btn-success" style="align-content:center; white-space:normal;">Purchase on Amazon.com now! <span class="glyphicon glyphicon-new-window"></span></a>
+                                                        }
+                                                        else
+                                                        {
+                                                            <a href="@item.Campaign.AmazonUrl" target="_blank" class="btn btn-success" style="align-content:center; white-space:normal;">Purchase on Amazon.com now! <span class="glyphicon glyphicon-new-window"></span></a>
+                                                        }
+                                                    </p>
+                                                </div>
+                                                <div class="panel-footer">
+                                                    <a href="@item.Campaign.AmazonUrl#summaryStars" target="_blank" class="btn btn-default" style="align-content:center; white-space:normal;">Write Review on Amazon.com now! <span class="glyphicon glyphicon-new-window"></span></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="CompletedReviews">
+                    <div class="col-lg-12">
+
+                        <div class="alert alert-success review-alert col-lg-12" role="alert">
+                            <div class="col-xs-12 dashboard-tab-description">
+                                Your past reviews from great deals you've received on Blue Ribbons Review will show up here!
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="row">
+                                    @foreach (var item in Model.Reviews)
+                                    {
+                                        if (item.Reviewed == true)
+                                        {
+                                            <div class="col-sm-12 col-md-8 col-lg-4">
+                                                <div class="panel revieweditempanel">
+                                                    <div class="panel-heading">
+                                                        <div class="panel-title"><a href="#" data-toggle="tooltip" data-placement="bottom" title="@item.Campaign.Name">@item.Campaign.Name</a></div>
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <p>
+                                                            <img src="@item.Campaign.ImageUrl"><br />
+                                                        </p>
+                                                        <p>
+                                                            Your Rating:<br />
+                                                            @for (int x = 0; x < item.ProductRating; x++)
+                                                            {<span class="glyphicon glyphicon-star"></span>}
+                                                        </p>
+                                                    </div>
+                                                    <div class="panel-footer">
+                                                        <a href="@item.ReviewLink" target="_blank" class="btn btn-default">Read Your Review! <span class="glyphicon glyphicon-new-window"></span></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="OpenRequests">
+                    <div class="col-lg-12">
+                        <div class="alert alert-info review-alert col-lg-12" role="alert">
+                            <div class="cl-xs-12 dashboard-tab-description">
+                                When you request a deal, you'll see it listed here. If you're selected to participate, you'll see the item under the
+                                "Open Reviews" tab and it will be removed from here. If you are not selected for that particular product, it will be
+                                completely removed.
+                            </div>
+                            <div class="col-xs-12">
+                                @foreach (var item in Model.Requests)
+                                {
+                                    if (item.ActiveRequest == true)
+                                    {
+                                        <div class="col-sm-12 col-md-8 col-lg-4">
+                                            <div class="panel revieweditempanel">
+                                                <div class="panel-heading">
+                                                    <div class="panel-title"><a href="#" data-toggle="tooltip" data-placement="bottom" title="@item.Campaign.Name">@item.Campaign.Name</a></div>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <div>
+                                                        <div class="productimagebox">
+                                                            <a data-target="#@item.Campaign.ASIN" role="button" data-toggle="modal"><img src=@item.Campaign.ImageUrl /></a>
+                                                        </div>
+                                                        <div class="modal fade" id="@item.Campaign.ASIN">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <button class="close" data-dismiss="modal">&times;</button>
+                                                                        <h4>@item.Campaign.Name</h4>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <div class="row">
+                                                                            <div class="col-md-4 col-sm-12 ">
+                                                                                <img class="modal-img" src=@item.Campaign.ImageUrl />
+                                                                            </div>
+                                                                            <div class="col-md-8 col-sm-12">
+
+
+                                                                                <p>
+                                                                                    Regular Price: @item.Campaign.RetailPrice<br />
+                                                                                    Reviewer Discount: ($@item.Campaign.Discount)
+                                                                                </p>
+                                                                                <p>
+                                                                                    <h1 class="specialprice">@item.Campaign.SalePrice</h1>
+                                                                                    <hr />
+                                                                                </p>
+                                                                                <p>
+                                                                                    @item.Campaign.Description
+                                                                                </p>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="panel-footer">
+                                                    <a data-target="#@item.Campaign.ASIN" role="button" data-toggle="modal" class="btn btn-default" style="align-content:center; white-space:normal;">See Details!</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <style type="text/css">
+                #footer-padding {
+                    display: none;
+                }
+            </style>
+
+        </div>
+        @*<div class="recommended-items">
+                <h3 class="glyphicon glyphicon-dashboard-title">Recommended Items: @Html.ActionLink("View More Products To Review", "Index", "Campaign", null, new { @class = "btn btn-default recommended-button" })</h3>
+                <div>
+                    @Html.Action("Carousel");
+                </div>
+            </div>*@
+    </div>
+
+
+        @section Scripts{
+
+            @*Social Buttons on this page*@
+            <script src="@Url.Content("~/Scripts/SocialInit.js")"></script>
+        }

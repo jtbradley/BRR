@@ -1,0 +1,59 @@
+﻿@model Blue_Ribbon.Models.PricingStructure
+
+
+@{
+    ViewBag.Title = "PricingStructure";
+}
+
+<h2 class="product-top">Pricing Structure</h2>
+
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-success">
+        <strong>@ViewBag.Message</strong>
+    </div>
+}
+
+<div class="row">
+    <div class="col-sm-12">
+
+        @using (Html.BeginForm())
+        {
+            @Html.HiddenFor(model => model.PricingStructureId)
+            @Html.AntiForgeryToken()
+            <table class="PricingTable">
+                <tr>
+                    <th>Review Type</th>
+                    <th>0-50 Reviews</th>
+                    <th>51-100 Reviews</th>
+                    <th>101+ Reviews</th>
+                </tr>
+                <tr>
+                    <td>Text</td>
+                    <td>@Html.EditorFor(model => model.T1, new { @class = "priceBox" })</td>
+                    <td>@Html.EditorFor(model => model.T2, new { @class = "priceBox" })</td>
+                    <td>@Html.EditorFor(model => model.T3, new { @class = "priceBox" })</td>
+                </tr>
+                <tr>
+                    <td>Photo</td>
+                    <td>@Html.EditorFor(model => model.P1, new { @class = "priceBox" })</td>
+                    <td>@Html.EditorFor(model => model.P2, new { @class = "priceBox" })</td>
+                    <td>@Html.EditorFor(model => model.P3, new { @class = "priceBox" })</td>
+                </tr>
+                <tr>
+                    <td>Video</td>
+                    <td>@Html.EditorFor(model => model.V1, new { @class = "priceBox" })</td>
+                    <td>@Html.EditorFor(model => model.V2, new { @class = "priceBox" })</td>
+                    <td>@Html.EditorFor(model => model.V3, new { @class = "priceBox" })</td>
+                </tr>
+            </table>
+
+            <input type="submit" value="Update Pricing" class="btn btn-primary" />
+
+        }
+
+
+
+    </div>
+</div>
+

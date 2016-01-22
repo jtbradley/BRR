@@ -1,0 +1,55 @@
+﻿@model Blue_Ribbon.Models.UserRoleViewModel
+
+@{
+    ViewBag.Title = "ModifyPermissions";
+}
+
+<h2>Modify Permissions</h2>
+
+<hr />
+@using (Html.BeginForm("ModifyPermissions", "Account"))
+{
+    @Html.HiddenFor(model => model.AmazonID)
+<dl class="dl-horizontal">
+    <dt>
+        @Html.DisplayNameFor(model => model.AmazonID)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.AmazonID)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.FirstName)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.FirstName)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.Lastname)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Lastname)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.Email)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Email)
+    </dd>
+    <dt>
+        Role
+    </dt>
+    <dd>
+        @Html.ListBoxFor(m => m.SelectedRoleIds, Model.RoleChoices, new { htmlAttributes = new { @class = "form-control" } })
+    </dd>
+</dl>
+
+<div class="form-group">
+        <input type="submit" value="Update Permissions" class="btn btn-warning pull-right" />
+</div>
+
+
+}

@@ -1,0 +1,13 @@
+﻿@model Blue_Ribbon.ViewModels.ReviewOrderViewModel
+@{
+    ViewBag.Title = "Success";
+}
+
+<div id="success-conf">
+    <br/>
+    <br/>
+    <h2>Your Campaign Is Now Live</h2>
+    <p> Your payment has been processed successfully by PayPal<p/> 
+    <br/>
+    @Html.ActionLink("Products Page","Index","Product",null,new { @class = "btn btn-primary"})   
+<div/>

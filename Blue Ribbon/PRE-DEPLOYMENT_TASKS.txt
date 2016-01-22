@@ -1,0 +1,11 @@
+﻿Before pushing updates to the live web application:
+
+
+1. Go to Controllers > AccountController approx line 216. This sets the default permissions for new people signing up.
+   For dev/test, it's setup to make new users as "campaignManager", but we need it set to "customer" for live site.
+
+2. Go to Migrations > Configuration.cs file and comment out ALL code in the SEED method.
+
+3. If model changes have been made we need to be sure to check "Code First MIgrations" on deployment options.
+
+4. Set Paypal settings to live settings. 

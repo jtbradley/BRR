@@ -1,0 +1,306 @@
+﻿@model Blue_Ribbon.ViewModels.CampaignDetailsPageViewModel
+
+@{
+    ViewBag.Title = "Campaign Details";
+}
+<div class="mainContent">
+    <div class="row">
+        <div class="col-sm-4">
+            <h2>Details</h2>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+        <div class="col-sm-8 headinfo">
+
+        @if (Model.Campaign.OpenCampaign == false)
+            {
+            <div class="alert alert-danger campaignalert">
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-actions no-color">
+                        <strong>This campaign is currently INACTIVE.</strong><input type="submit" value="Reopen Campaign" class="btn btn-danger btn-reopen" />
+                    </div>
+                }
+            </div>
+        }
+
+        @if (Model.Campaign.OpenCampaign == true)
+            {
+            @Html.ActionLink("Modify Campaign", "Edit", new { id = Model.Campaign.CampaignID }, htmlAttributes: new { @class = "btn btn-warning btn-mod-campaign" })
+            @Html.ActionLink("Close Campaign", "Close", new { id = Model.Campaign.CampaignID }, htmlAttributes: new { @class = "btn btn-danger" })
+        }
+        </div>
+    </div>
+    <hr />
+        <div class="row campaignsummary">
+            <div class="col-sm-4, col-md-2">
+                <img src="@Model.Campaign.ImageUrl" id="detailpage" />
+            </div>
+           <div class="col-sm-6 col-md-5">
+               <div class="row">
+               <dl class="dl-horizontal">
+                   <dt>
+                       @Html.DisplayNameFor(model => model.Campaign.Name)
+                   </dt>
+
+                   <dd>
+                       @Html.DisplayFor(model => model.Campaign.Name)
+                   </dd>
+                   <dt>
+                       @Html.DisplayNameFor(model => model.Campaign.ASIN)
+                   </dt>
+
+                   <dd>
+                       @Html.DisplayFor(model => model.Campaign.ASIN)
+                   </dd>
+                   <dt>
+                       @Html.DisplayNameFor(model => model.Campaign.CampaignID)
+                   </dt>
+
+                   <dd>
+                       @Html.DisplayFor(model => model.Campaign.CampaignID)
+                   </dd>
+                   <dt>
+                       @Html.DisplayNameFor(model => model.Campaign.Vendor)
+                   </dt>
+                   <dd>
+                       @Html.DisplayFor(model => model.Campaign.Vendor.Name)
+                   </dd>
+                   <dt>
+                       @Html.DisplayNameFor(model => model.Campaign.Category)
+                   </dt>
+
+                   <dd>
+                       @Html.DisplayFor(model => model.Campaign.Category)
+                   </dd>
+                   <dt>
+                       @Html.DisplayNameFor(model => model.Campaign.StartDate)
+                   </dt>
+
+                   <dd>
+                       @Html.DisplayFor(model => model.Campaign.StartDate)
+                   </dd>
+                   <dt>
+                       @Html.DisplayNameFor(model => model.Campaign.CloseDate)
+                   </dt>
+
+                   <dd>
+                       @Html.DisplayFor(model => model.Campaign.CloseDate)
+                   </dd>
+                   <dt>
+                       @Html.DisplayNameFor(model => model.Campaign.SalePrice)
+                   </dt>
+
+                   <dd>
+                       @Model.Campaign.displayAsCurrency(Model.Campaign.SalePriceNumerical)
+                   </dd>
+                   <dt>
+                       @Html.DisplayNameFor(model => model.Campaign.DailyLimit)
+                   </dt>
+
+                   <dd>
+                       @Html.DisplayFor(model => model.Campaign.DailyLimit)
+                   </dd>
+               </dl>
+                </div>
+               <div class="row text-left">
+                   <h3>Discount Codes Available: @Model.CodesRemaining</h3>
+               </div>
+
+           </div>
+            <div class="col-sm-12 col-md-5">
+                    <div class="panel panel-primary">
+                        <!-- Default panel contents -->
+                        <div class="panel-heading statsheader">Campaign Stats</div>
+
+                        <!-- Table -->
+                        <table class="table statstable">
+                            <tr>
+                                <th class="statsmaincol">Review Type</th>
+                                <th class="statscol">Goal</th>
+                                <th>Requests</th>
+                                <th>Open</th>
+                                <th>Completed</th>
+                                <th>Remaining</th>
+                            </tr>
+                            @foreach (var item in Model.Campaign.UpdateCampaignStats())
+                            {
+                            <tr>
+                                <td>
+                                    @item.Key
+                                </td>
+                                <td>
+                                    @item.Value[0]
+                                </td>
+                                <td>
+                                   @item.Value[1]
+                                </td>
+                                <td>
+                                    @item.Value[2]
+                                </td>
+                                <td>
+                                    @item.Value[3]
+                                </td>
+                                <td>
+                                    @item.Value[4]
+
+                                </td>
+
+                            </tr>
+                            }
+                        </table>
+                    </div>
+            </div>
+         </div>
+
+
+        <hr />
+    <div class="row" id="statsalert">
+        <div class="alert alert-success">
+            <strong>@Html.ActionLink("Reload", "Details", new { id = Model.Campaign.CampaignID }) page to see updated campaign stats and customer info.</strong>
+        </div>
+    </div>
+        <div class="campaigncustomers">
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#userrequests" aria-controls="profile" role="tab" data-toggle="tab">Customer Requests</a></li>
+                <li role="presentation"><a href="#selectedusers" aria-controls="home" role="tab" data-toggle="tab">Selected Customers</a></li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane" id="selectedusers">
+                    <h3>Selected Customers</h3>
+                    <table class="table">
+                        <tr>
+                            <th>Customer ID</th>
+                            <th>Selected Date</th>
+                            <th>Discount Code</th>
+                            <th>Review Type</th>
+                            <th>OpenTime /<br /> Days To Review</th>
+                            <th>Completed</th>
+                            <th>Product Rating</th>
+                            <th>Word Count</th>
+                            <th>Review Date</th>
+                        </tr>
+                        @foreach (var item in Model.Campaign.Reviews)
+                         {
+                            <tr>
+                                <td>
+                                    @Html.ActionLink(@item.CustomerID,"Details","Customer",new { @id = item.CustomerID }, null)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SelectedDate)
+                                </td>
+                                <td id="@item.ReviewID">
+                                    @if (item.DiscountCode == null)
+                                    {
+                                        <a role="button" class="btn btn-sm btn-primary btn-apply-code">Apply Code</a>
+                                    }
+                                    else
+                                    {
+                                        @item.DiscountCode
+                                    }
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ReviewTypeExpected)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DaysToReview)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Reviewed)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ProductRating)
+                                </td>
+                                <td>
+                                    @if (item.ReviewLength > 0)
+                                    {
+                                        @Html.DisplayFor(modelItem => item.ReviewLength)
+                                    }
+                                </td>
+                                <td>
+                                    @if (item.ReviewLink != null)
+                                    {
+                                        <a href="@item.ReviewLink" target="_blank">@item.ReviewDate</a>
+                                    }
+                                    else
+                                    {
+                                        @Html.DisplayFor(modelItem => item.ReviewDate)
+                                    }
+
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+                <div role="tabpanel" class="tab-pane active" id="userrequests">
+                    <h3>Customers Requests</h3>
+                    <table class="table">
+                        <tr>
+                            <th>Customer ID</th>
+                            <th>Customer Name</th>
+                            <th>Days Being Member</th>
+                            <th>Request Date</th>
+                            <th>Total Requests</th>
+                            <th>Avg. Words</th>
+                            <th>Avg. Rating</th>
+                            <th>Review Type</th>
+                            <th>Completed Reviews</th>
+                            <th>Open Reviews</th>
+                            <th class="col-sm-2">Action</th>
+
+                        </tr>
+                        @foreach (var item in Model.Requests)
+                        {if (item.Request.ActiveRequest == true){
+
+                         
+                            var stats = item.Customer.getStats();
+                            <tr>
+                                <td>
+                                    <a href="@item.Customer.generateURL()" target="_blank">@Html.DisplayFor(modelItem => item.Customer.CustomerID)</a>
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Customer.FullName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Customer.DaysBeingMember)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Request.RequestDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TotalRequests)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.AvgWordCount)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.AvgProductRating)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Request.ReviewType)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CompletedReviews)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.OpenReviews)
+                                </td>
+                                <td id="@item.Request.ItemRequestID">
+                                    <a role="button" class="btn btn-sm btn-primary btn-choose-customer">Select Customer</a>
+                                </td>
+
+                            </tr>
+                           }
+                        }
+                    </table>
+                </div>
+            </div>
+
+        </div>
+      </div>
+
+

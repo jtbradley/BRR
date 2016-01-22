@@ -1,0 +1,91 @@
+﻿@model Blue_Ribbon.ViewModels.VendorIndexViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="product-top">Vendors</h2>
+
+@using (Html.BeginForm("Index", "Vendor", FormMethod.Get))
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <div class="row campaignsearch text-right">
+        <div class="col-sm-12">
+            @Html.TextBox("currentSearch", ViewBag.SearchBox as string, new { style = "width:200px" })
+            <input type="submit" value="Search" class="btn btn-primary" />
+            @Html.ActionLink("Reset", "Index", null, htmlAttributes: new { @class = "btn btn-default" })
+        </div>
+    </div>
+}
+<table class="table">
+    <tr>
+        <th>
+            Vendor Name
+        </th>
+        <th>
+            Total Campaigns
+        </th>
+        <th>
+            Open Campaigns
+        </th>
+        <th>
+            Completed Campaigns
+        </th>
+        <th>
+            Total Reviews
+        </th>
+        <th>
+            Open Reviews
+        </th>
+        <th>
+            Completed Reviews
+        </th>
+        <th>
+            Avg Review Length
+        </th>
+        <th>
+            Avg Product Rating
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.Vendors) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.vendor.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalCampaigns)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OpenCampaigns)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CompletedCampaigns)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalReviews)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OpenReviews)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CompletedReviews)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AvgWordCount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AvgProductRating)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.vendor.VendorId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.vendor.VendorId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.vendor.VendorId })
+        </td>
+    </tr>
+}
+
+</table>

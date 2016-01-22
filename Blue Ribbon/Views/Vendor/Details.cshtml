@@ -1,0 +1,215 @@
+﻿@model Blue_Ribbon.ViewModels.SingleVendorViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+<h4>Vendor</h4>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Vendor.VendorId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+<hr />
+<div class="row">
+    <div class="col-sm-6">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Vendor.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Vendor.Name)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Vendor.JoinDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Vendor.JoinDate)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Vendor.VendorNotes)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Vendor.VendorNotes)
+            </dd>
+            <dt>
+                Associated CustomerID
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Vendor.CustomerID)
+            </dd>
+        </dl>
+        </div>
+    <div class="col-sm-6">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Vendor.ContactName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Vendor.ContactName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Vendor.Email)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Vendor.Email)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Vendor.PhoneNumber)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Vendor.PhoneNumber)
+            </dd>
+        </dl>
+    </div>
+</div>
+<hr />
+<h2>Vendor Summary</h2>
+<table class="table">
+    <tr>
+        <th>
+            Vendor Name
+        </th>
+        <th>
+            Join Date
+        </th>
+        <th>
+            Total Campaigns
+        </th>
+        <th>
+            Open Campaigns
+        </th>
+        <th>
+            Completed Campaigns
+        </th>
+        <th>
+            Total Reviews
+        </th>
+        <th>
+            Open Reviews
+        </th>
+        <th>
+            Completed Reviews
+        </th>
+        <th>
+            Avg Product Rating
+        </th>
+        <th>
+            Avg Review Length
+        </th>
+    </tr>
+
+    @*It's just one vendor, but it's easier to just copy existing code.*@ 
+    @foreach (var item in Model.vendorsummary)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.vendor.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.vendor.JoinDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalCampaigns)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OpenCampaigns)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompletedCampaigns)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalReviews)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OpenReviews)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompletedReviews)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AvgWordCount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AvgProductRating)
+            </td>
+        </tr>
+    }
+</table>
+<hr />
+<h2>Vendor Campaigns Summary</h2>
+<table class="table admintable">
+    <tr>
+        <th class="col-sm-1">
+            Item Requests
+        </th>
+        <th class="col-sm-1">
+            Codes Needed
+        </th>
+        <th class="col-sm-1">
+            Reviews Needed
+        </th>
+        <th class="col-sm-1">
+            Open Reviews
+        </th>
+        <th class="col-sm-1">
+            Reviews Completed
+        </th>
+        <th class="col-sm-1">
+            Open Campaign
+        </th>
+        <th class="col-sm-1">
+            Price
+        </th>
+        <th class="col-sm-1">
+            Vendor
+        </th>
+        <th class="col-sm-3">
+            Product
+        </th>
+        <th class="col-sm-1">
+        </th>
+    </tr>
+
+    @foreach (var item in Model.vendorcampaigns.Campaigns)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OpenRequests)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CodesNeeded)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Campaign.ReviewsStillNeeded)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OpenReviews)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompletedReviews)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Campaign.OpenCampaign)
+            </td>
+            <td>
+                @item.Campaign.displayAsCurrency(item.Campaign.SalePriceNumerical)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Campaign.Vendor.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Campaign.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", "Campaign", new { id = item.Campaign.CampaignID }, null)
+            </td>
+        </tr>
+    }
+
+</table>
+

@@ -1,0 +1,143 @@
+﻿
+@model Blue_Ribbon.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">
+        <strong>@ViewBag.Error</strong>
+    </div>
+        <hr />
+}
+
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form", @id = "register-form" }))
+{
+    @Html.AntiForgeryToken()
+    <h4>Create a new account.</h4>
+    <hr />
+    <div class="row">
+        <div class="col-sm-4">
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(m => m.Email, new { @class = "col-md-3 control-label" })
+                <div class="col-md-9">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" , @placeholder = "youremail@email.com"})
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.EmailConfirm, new { @class = "col-md-3 control-label" })
+                <div class="col-md-9">
+                    @Html.TextBoxFor(m => m.EmailConfirm, new { @class = "form-control" , @placeholder = "youremail@email.com" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Password, new { @class = "col-md-3 control-label"})
+                <div class="col-md-9">
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "6+ Letters/Numbers" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-3 control-label" })
+                <div class="col-md-9">
+                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Repeat Password" })
+                </div>
+            </div>            
+            <div class="form-group">
+                @Html.LabelFor(m => m.FirstName, new { @class = "col-md-3 control-label" })
+                <div class="col-md-9">
+                    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" , @placeholder = "First Name" })
+                    @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.LastName, new { @class = "col-md-3 control-label" })
+                <div class="col-md-9">
+                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "Last Name" })
+                    @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <hr />
+            <div class="form-group" id="seller-checkbox">
+                <div class="col-md-10">
+                    <h2 style="font-weight:bold">Also register as a seller!</h2>
+                    <h3>Click here to become a seller</h3>
+                    @Html.LabelFor(m => m.BeSeller, "", new { @class = "control-label"})
+                    <p>You'll complete your business information on next page.</p>
+                    <p>Visit @Html.ActionLink("Sellers page", "Index", "Seller",null, new { @target = "_blank" }) for more information.</p>
+                </div>
+
+                <div class="col-md-2" id="checkbox">
+                    @Html.CheckBoxFor(m => m.BeSeller, new { @class = "form-control", @placeholder = "Enter Amazon Profile ID" })
+
+                </div>
+            </div>
+
+        </div>
+        <div class="col-sm-8">
+            <h3>To register, you must enter your Amazon Profile ID. Find it by:</h3>
+            <div class="text-danger">
+                Note: this needs to be the Amazon.com account you will use to purchase AND review products on Blue Ribbons Review.
+            </div>
+            <ol>
+                <li>Go Here: <a href="https://www.amazon.com/profile" target="_blank">https://www.amazon.com/profile</a></li>
+                <li>You may need to login.</li>
+                <li>Your profile ID is in the Address Bar.</li>
+            </ol>
+            <img src="~/images/exampleid.png" />
+            <hr />
+            <div class="form-group">
+                @Html.LabelFor(m => m.CustomerID, "https://www.amazon.com/gp/profile/", new { @class = "col-md-4 control-label" })
+                <div class="col-md-8">
+                    @Html.TextBoxFor(m => m.CustomerID, new { @class = "form-control", @id = "amazon-profile-check", @placeholder = "Enter Amazon Profile ID" })
+                    @Html.ValidationMessageFor(m => m.CustomerID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-4 col-md-4">
+
+                    <a role="button" id="validate-register-form" class="btn btn-primary" style="margin-top:10px">Become a Reviewer!</a>
+                    <div id="sellerNotice"><i>Just want to review great products? Uncheck box to the left.</i></div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="policy-modal">
+            <div class="modal-dialog policy-modal">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="col-sm-6 panel panel-default">
+                            <div class="panel-heading text-center">
+                                <h3>Terms of Service</h3>
+                            </div>
+                            <div class="panel-body policy-box">
+                                @Html.Partial("_ToSPartial")
+                            </div>
+                        </div>
+                        <div class="col-sm-6 panel panel-default">
+                            <div class="panel-heading text-center">
+                                <h3>Privacy Policy</h3>
+                            </div>
+                            <div class="panel-body policy-box">
+                                @Html.Partial("_PrivacyPolicyPartial")
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer text-right">
+                        <h3>I agree to the Terms of Service and the Privacy Policy.  <a role="button" id="confirm-register-button" class="btn btn-primary" style="margin-top:10px">Register</a></h3>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

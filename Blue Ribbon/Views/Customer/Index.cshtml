@@ -1,0 +1,106 @@
+﻿@model Blue_Ribbon.ViewModels.CustomerIndexViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="product-top">Customers</h2>
+
+@using (Html.BeginForm("Index", "Customer", FormMethod.Get))
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <div class="row campaignsearch text-right">
+
+        <div class="col-sm-12">
+            @Html.TextBox("currentSearch", ViewBag.SearchBox as string, new { style = "width:200px" })
+            <input type="submit" value="Search" class="btn btn-primary" />
+            @Html.ActionLink("Reset", "Index", null, htmlAttributes: new { @class = "btn btn-default" })<br />
+            @Html.CheckBox("showAll", false) Show all Customers (longer load time)
+        </div>
+    </div>
+}
+<table class="table">
+    <tr>
+        <th class="col-sm-1">
+            Amazon ID
+        </th>
+        <th class="col-sm-1">
+            Full Name
+        </th>
+        <th class="col-sm-1">
+            Days Being Member
+        </th>
+        <th class="col-sm-1">
+            Email
+        </th>
+        <th class="col-sm-1">
+            Total Requests
+        </th>
+        <th class="col-sm-1">
+            Completed Reviews
+        </th>
+        <th class="col-sm-1">
+            Open Reviews
+        </th>
+        <th class="col-sm-1">
+            Photo Reviews
+        </th>
+        <th class="col-sm-1">
+            Video Reviews
+        </th>
+        <th class="col-sm-1">
+            Avg. Word Count
+        </th>
+        <th class="col-sm-1">
+            Average Product Rating
+        </th>
+        <th class="col-sm-1">
+
+        </th>
+    </tr>
+
+@foreach (var item in Model.Customers) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Customer.CustomerID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Customer.FullName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Customer.DaysBeingMember)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Customer.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalRequests)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CompletedReviews)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OpenReviews)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PhotoReviews)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VideoReviews)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AvgWordCount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AvgProductRating)
+        </td>
+
+        <td>
+            @Html.ActionLink("Details", "Details", new { id=item.Customer.CustomerID })
+        </td>
+    </tr>
+}
+
+</table>

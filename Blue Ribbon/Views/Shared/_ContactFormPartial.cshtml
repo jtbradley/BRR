@@ -1,0 +1,49 @@
+﻿@model Blue_Ribbon.Models.ContactFormViewModel
+
+@using (@Html.BeginForm("ContactForm", "Dashboard", FormMethod.Post, new { @id = "contactform" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.AmazonID)
+    @Html.HiddenFor(model => model.Name)
+    @Html.HiddenFor(model => model.LoggedIn)
+
+
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-12">
+                    @Html.CheckBoxFor(model => model.ReviewedItem)
+                    I reviewed an item, but it's still showing that I need to review it.
+                    @Html.TextBoxFor(model => model.ReviewedItemASIN,null,new { @placeholder = "Enter item ID...", @disabled ="disabled"})
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-12">
+                    @Html.CheckBoxFor(model => model.DiscountNeeded)
+                    It keeps telling me the discount code is not available.
+                    @Html.TextBoxFor(model => model.DiscountNeededASIN, null, new { @placeholder = "Enter item ID..." , @disabled = "disabled" })
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-12 textareabox">
+                    @Html.TextAreaFor(model => model.Message, new { @placeholder = "Send us a message...!" , @rows = 5 })
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-12 emailbox">
+                    Current Email Address: @Html.TextBoxFor(model => model.Email, Model.Email, new { @placeholder = Model.Email })
+                </div>
+            </div>
+        </div>
+}
+
+

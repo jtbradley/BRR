@@ -1,0 +1,78 @@
+﻿@model Blue_Ribbon.ViewModels.GeneralMessageViewModel
+
+@{
+    ViewBag.Title = "Contact Us";
+}
+
+<div class="product-top">
+    <h2>@ViewBag.Title</h2>
+    <img src="~/images/br_logo.png" class="faq-logo" />
+
+    <div class="row text-center" style="margin:20px 0">
+        @Html.ActionLink("Become a Seller!", "Seller", "Home", null, new { @class = "btn btn-lg btn-primary" })
+        <a target="_blank" href="https://www.facebook.com/blueribbonsreview"><div class="btn btn-lg btn-primary fb-connect">Connect with us on Facebook!</div></a>
+    </div>
+</div>
+    <div class="row col-sm-12">
+
+        <div class="col-sm-8 margin-center">
+            <div class="panel panel-default contact-page-panel">
+                <div class="panel-heading">
+                    Send Us A Message!
+                </div>
+                <div class="panel-body">
+                    <div id="generalformdiv">
+                        @using (@Html.BeginForm("GeneralMessageForm", "Home", FormMethod.Post, new { @id = "generalform" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            <div class="row form-group margin-center col-sm-12">
+                                @Html.LabelFor(model => model.Name, "Name", htmlAttributes: new { @class = "control-label col-sm-2 text-left" })
+                                <div class="col-md-8">
+                                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control margin-center" })
+                                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="row form-group margin-center col-sm-12">
+                                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-sm-2 text-left" })
+                                <div class="col-md-8">
+                                    @Html.TextBoxFor(model => model.Email, new { @class = "form-control margin-center" })
+                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="row form-group margin-center col-sm-12">
+                                @Html.LabelFor(model => model.Message, htmlAttributes: new { @class = "control-label col-sm-2 text-left" })
+                                <div class="col-md-8">
+                                    @Html.TextAreaFor(model => model.Message, new { @class = "form-control margin-center" })
+                                    @Html.ValidationMessageFor(model => model.Message, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group row text-center">
+                                <button type="button" class="btn btn-primary" id="generalformsubmit">Send Message</button>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <style type="text/css">
+                #footer-padding {
+                    display: none;
+                }
+            </style>
+
+        </div>
+
+
+    </div>
+
+
+
+@section Scripts{
+
+    @*Social Buttons on this page*@
+    <script src="@Url.Content("~/Scripts/SocialInit.js")"></script>
+}

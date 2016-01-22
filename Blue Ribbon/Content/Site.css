@@ -1,0 +1,1853 @@
+﻿/*! normalize.css v3.0.2 | MIT License | git.io/normalize */
+
+/**
+ * 1. Set default font family to sans-serif.
+ * 2. Prevent iOS text size adjust after orientation change, without disabling
+ *    user zoom.
+ */
+
+html {
+  font-family: sans-serif; /* 1 */
+  -ms-text-size-adjust: 100%; /* 2 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+}
+
+/**
+ * Remove default margin.
+ */
+
+body {  
+  margin: 0;
+    color: #444;
+  padding: 50px 0 20px 0;
+    font-weight: 400 !important;
+    font-family: 'Roboto', sans-serif,'Gill Sans MT';
+}
+
+/* HTML5 display definitions
+   ========================================================================== */
+
+/**
+ * Correct `block` display not defined for any HTML5 element in IE 8/9.
+ * Correct `block` display not defined for `details` or `summary` in IE 10/11
+ * and Firefox.
+ * Correct `block` display not defined for `main` in IE 11.
+ */
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+menu,
+nav,
+section,
+summary {
+  display: block;
+}
+
+/**
+ * 1. Correct `inline-block` display not defined in IE 8/9.
+ * 2. Normalize vertical alignment of `progress` in Chrome, Firefox, and Opera.
+ */
+
+audio,
+canvas,
+progress,
+video {
+  display: inline-block; /* 1 */
+  vertical-align: baseline; /* 2 */
+}
+
+/**
+ * Prevent modern browsers from displaying `audio` without controls.
+ * Remove excess height in iOS 5 devices.
+ */
+
+audio:not([controls]) {
+  display: none;
+  height: 0;
+}
+
+/**
+ * Address `[hidden]` styling not present in IE 8/9/10.
+ * Hide the `template` element in IE 8/9/11, Safari, and Firefox < 22.
+ */
+
+[hidden],
+template {
+  display: none;
+}
+
+/* Links
+   ========================================================================== */
+
+/**
+ * Remove the gray background color from active links in IE 10.
+ */
+
+a {
+  background-color: transparent;
+}
+
+/**
+ * Improve readability when focused and also mouse hovered in all browsers.
+ */
+
+a:active,
+a:hover {
+  outline: 0;
+}
+
+/* Text-level semantics
+   ========================================================================== */
+
+/**
+ * Address styling not present in IE 8/9/10/11, Safari, and Chrome.
+ */
+
+abbr[title] {
+  border-bottom: 1px dotted;
+}
+
+/**
+ * Address style set to `bolder` in Firefox 4+, Safari, and Chrome.
+ */
+
+b,
+strong {
+  font-weight: bold;
+}
+
+/**
+ * Address styling not present in Safari and Chrome.
+ */
+
+dfn {
+  font-style: italic;
+}
+
+/**
+ * Address variable `h1` font-size and margin within `section` and `article`
+ * contexts in Firefox 4+, Safari, and Chrome.
+ */
+
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+/**
+ * Address styling not present in IE 8/9.
+ */
+
+mark {
+  background: #ff0;
+  color: #000;
+}
+
+/**
+ * Address inconsistent and variable font size in all browsers.
+ */
+
+small {
+  font-size: 80%;
+}
+
+/**
+ * Prevent `sub` and `sup` affecting `line-height` in all browsers.
+ */
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sup {
+  top: -0.5em;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+/* Embedded content
+   ========================================================================== */
+
+/**
+ * Remove border when inside `a` element in IE 8/9/10.
+ */
+
+img {
+  border: 0;
+}
+
+/**
+ * Correct overflow not hidden in IE 9/10/11.
+ */
+
+svg:not(:root) {
+  overflow: hidden;
+}
+
+/* Grouping content
+   ========================================================================== */
+
+/**
+ * Address margin not present in IE 8/9 and Safari.
+ */
+
+figure {
+  margin: 1em 40px;
+}
+
+/**
+ * Address differences between Firefox and other browsers.
+ */
+
+hr {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 0;
+}
+
+/**
+ * Contain overflow in all browsers.
+ */
+
+pre {
+  overflow: auto;
+}
+
+/**
+ * Address odd `em`-unit font size rendering in all browsers.
+ */
+
+code,
+kbd,
+pre,
+samp {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+
+/* Forms
+   ========================================================================== */
+
+/**
+ * Known limitation: by default, Chrome and Safari on OS X allow very limited
+ * styling of `select`, unless a `border` property is set.
+ */
+
+/**
+ * 1. Correct color not being inherited.
+ *    Known issue: affects color of disabled elements.
+ * 2. Correct font properties not being inherited.
+ * 3. Address margins set differently in Firefox 4+, Safari, and Chrome.
+ */
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  color: inherit; /* 1 */
+  font: inherit; /* 2 */
+  margin: 0; /* 3 */
+}
+
+/**
+ * Address `overflow` set to `hidden` in IE 8/9/10/11.
+ */
+
+button {
+  overflow: visible;
+}
+
+/**
+ * Address inconsistent `text-transform` inheritance for `button` and `select`.
+ * All other form control elements do not inherit `text-transform` values.
+ * Correct `button` style inheritance in Firefox, IE 8/9/10/11, and Opera.
+ * Correct `select` style inheritance in Firefox.
+ */
+
+button,
+select {
+  text-transform: none;
+}
+
+/**
+ * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
+ *    and `video` controls.
+ * 2. Correct inability to style clickable `input` types in iOS.
+ * 3. Improve usability and consistency of cursor style between image-type
+ *    `input` and others.
+ */
+
+button,
+html input[type="button"], /* 1 */
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: button; /* 2 */
+  cursor: pointer; /* 3 */
+}
+
+/**
+ * Re-set default cursor for disabled elements.
+ */
+
+button[disabled],
+html input[disabled] {
+  cursor: default;
+}
+
+/**
+ * Remove inner padding and border in Firefox 4+.
+ */
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+/**
+ * Address Firefox 4+ setting `line-height` on `input` using `!important` in
+ * the UA stylesheet.
+ */
+
+input, select {
+  line-height: normal;
+    border-radius: 5px;
+    color: #444;
+}
+
+select {
+    cursor: pointer;
+}
+
+/**
+ * It's recommended that you don't attempt to style these elements.
+ * Firefox's implementation doesn't respect box-sizing, padding, or width.
+ *
+ * 1. Address box sizing set to `content-box` in IE 8/9/10.
+ * 2. Remove excess padding in IE 8/9/10.
+ */
+
+input[type="checkbox"],
+input[type="radio"] {
+  box-sizing: border-box; /* 1 */
+  padding: 0; /* 2 */
+}
+
+/**
+ * Fix the cursor style for Chrome's increment/decrement buttons. For certain
+ * `font-size` values of the `input`, it causes the cursor style of the
+ * decrement button to change from `default` to `text`.
+ */
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/**
+ * 1. Address `appearance` set to `searchfield` in Safari and Chrome.
+ * 2. Address `box-sizing` set to `border-box` in Safari and Chrome
+ *    (include `-moz` to future-proof).
+ */
+
+input[type="search"] {
+  -webkit-appearance: textfield; /* 1 */
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box; /* 2 */
+  box-sizing: content-box;
+}
+
+/**
+ * Remove inner padding and search cancel button in Safari and Chrome on OS X.
+ * Safari (but not Chrome) clips the cancel button when the search input has
+ * padding (and `textfield` appearance).
+ */
+
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/**
+ * Define consistent border, margin, and padding.
+ */
+
+fieldset {
+  border: 1px solid #c0c0c0;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em;
+}
+
+/**
+ * 1. Correct `color` not being inherited in IE 8/9/10/11.
+ * 2. Remove padding so people aren't caught out if they zero out fieldsets.
+ */
+
+legend {
+  border: 0; /* 1 */
+  padding: 0; /* 2 */
+}
+
+/**
+ * Remove default vertical scrollbar in IE 8/9/10/11.
+ */
+
+textarea {
+  overflow: auto;
+}
+
+/**
+ * Don't inherit the `font-weight` (applied by a rule above).
+ * NOTE: the default cannot safely be changed in Chrome and Safari on OS X.
+ */
+
+optgroup {
+  font-weight: bold;
+}
+
+/* Tables
+   ========================================================================== */
+
+/**
+ * Remove most spacing between table cells.
+ */
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+td,
+th {
+  padding: 0;
+}
+
+/*================================ END NORMALIZE ============================== */
+
+
+
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: 'Roboto', sans-serif,'Gill Sans MT';
+}
+
+.fb-like {
+-ms-transform: scale(1.4); 
+-webkit-transform: scale(1.4); 
+-o-transform: scale(1.4); 
+-moz-transform: scale(1.4); 
+transform: scale(1.4);
+-ms-transform-origin: top left;
+-webkit-transform-origin: top left;
+-o-transform-origin: top left;
+-moz-transform-origin: top left;
+transform-origin: top left;
+}
+
+ /***Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 25px;
+    padding-bottom: 40px;
+    padding-right: 25px;
+    overflow: visible;
+}
+
+.intro {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: -30px;
+    margin-right: -30px;
+}
+
+
+.fill {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+
+
+.btn-primary {
+    background-color: rgba(10,156,213,.8);
+    border: none;
+    font-weight: 200;
+}
+
+    .btn-primary:hover {
+    background-color: rgba(10,156,213,.6);
+        border: none;
+}
+
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.navbar {
+    background-color: #272264;
+    color: #000000;
+    max-height: 50px;
+    max-width: 100%;
+}
+
+.in, .collapsing {
+    background-color: rgba(109, 154, 209,.97);
+}
+
+
+.icon-bar {
+    background-color: white;
+}
+
+.navbar-brand img {
+    height: 100%;
+}
+
+.navbar-brand {
+    padding: 8px;
+}
+
+.navbar li a {
+    color: white;
+    font-weight: 400;
+    font-size: 16px;
+    font-weight: 100;
+}
+
+.navbar li :hover {
+    font-weight: 400;
+    font-size: 16px;
+    color: #272264;
+}
+
+.dropdown-menu a {
+    color: #272264 !important;
+}
+
+.navbar-toggle, .navbar-toggle .icon-bar {
+    border-color: white;
+}
+
+
+.mainContent {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.header {
+    display: table;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+/* Registration Page (local and Facebook) */
+
+.policy-box {
+    height: 350px;
+    text-align: center;
+}
+
+.policy-box textarea {
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 100%;
+    max-height: 100%;
+        resize: none;
+}
+
+/* Login Page */
+.login-page-div {
+    padding-left: 50px;
+}
+
+.login-page-image img {
+    max-width: 100%;
+}
+
+#go_shopping {
+    width: 25%;
+    float: left;
+}
+
+#btn-pass-reset {
+    margin-left: 50px;
+    margin-bottom: 0 !important;
+}
+
+/* Contact Us Page */
+
+.control-label.col-sm-2.text-left {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.product-top > .text-left > a {
+    margin-left: 15px;
+}
+
+.btn-lg.btn-primary.fb-connect {
+    background-color: #272264;
+}
+
+.contact-page-panel .panel-heading {
+    margin-top: 15px;
+    font-weight: 300;
+    font-size: 1.5em;
+    text-align: center;
+    COLOR: #272264;
+    border-radius: 8px 8px 0 0;
+    font-weight: 300;
+    border: 1px solid #272264;
+    background-color: white;
+}
+
+.contact-page-panel .panel-body {
+    font-size: 1.2em;
+    padding: 15px;
+    height: 430px;
+}
+
+.form-control.margin-center {
+    margin-top: 12px;
+}
+
+.form-group.row.text-center {
+    margin-top: 24px;
+}
+
+#Message {
+    margin: 12px auto;
+    height: 150px;
+}
+
+#contact_img {
+    width: 30%;
+    margin-left: 30px;
+}
+
+#generalform {
+    margin-bottom: 60px;
+}
+
+/*  Review Example Page  */
+
+#reviewsExampleFrame {
+    width: 90vw;
+    height: 90vh;
+}
+
+/* Account Register Page*/
+
+#seller-checkbox {
+    background-color: #272264;
+    color: white;
+    font-weight: bold;
+    border-radius: 15px;
+    padding-bottom: 10px;
+}
+
+#checkbox {
+    margin-top: 65px;
+    padding-right: 20px;
+}
+
+
+/* Home Page  */
+
+#coverHome {
+    margin-left: -10%;
+    width: 85%;
+    background-position: 0 auto;
+    position: absolute;
+    z-index: -2;
+}
+
+#slideTwo {
+    text-align: center;
+}
+
+.productWrapper {
+    height: 395px;
+    margin-top: 3%;
+    margin-left: 4%;
+    color: #272264;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#textWrapperTwo{
+    
+    height:350px;
+    margin-top:1%;
+    margin-left:0%;
+    
+    
+
+}
+
+    #textWrapperTwo h2 {
+        text-align: center;
+        font-size: 36px;
+        margin-top: 10px;
+}
+
+    #textWrapperTwo p {
+        font-size: 20px;
+        padding: 20px;
+    text-align: center;
+        margin-top: 16px;
+}
+
+
+
+.prodWrap {
+    height: 350px;
+    background-color: #07A8B5;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 30px;
+    border-radius: 10px;
+    text-align: center;
+    overflow: hidden;
+    color: black;
+}
+
+    .prodWrap .itemtitle {
+        color: white;
+        margin-top: 10px;
+}
+
+    .prodWrap img {
+        background-color: white;
+        max-height: 45%;
+        margin-top: 6%;
+        margin-left: 6%;
+        margin-right: 6%;
+        border-radius: 8px;
+}
+
+    div.homeslide {
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+        height: 355px;
+        border: 0;
+    }
+
+    .homeslideimage {
+        width: 100%;
+}
+
+    div.homeproductimage {
+        display: table-cell;
+        margin: 0;
+        padding: 5px;
+}
+
+        div.homeproductimage img {
+            max-width: 66%;
+            margin: 0;
+}
+
+    div.homeproducttext {
+        margin: 0;
+}
+
+    .alertDiscountCode {
+        color: black;
+        font-size: 1.2em;
+}
+
+
+    #how-to-wrapper {
+        padding-bottom: 20px;
+        margin: 0 auto;
+        display: inline-block;
+}
+
+        #how-to-wrapper h2 {
+            text-align: center;
+            color: #89a4c4;
+    border-bottom: 1px solid;
+            margin-top: 24px;
+            margin-bottom: 15px;
+            letter-spacing: 3px;
+            padding-bottom: 12px;
+}
+
+        #how-to-wrapper .panel h3 {
+            text-align: center;
+    display: block;
+    margin-left: 10px;
+}
+
+        #how-to-wrapper .step-header {
+            width: 25%;
+            float: left;
+}
+
+        #how-to-wrapper .step-p {
+            width: 50%;
+            float: left;
+            margin-top: 7%;
+}
+
+
+    .ribbon-steps {
+        float: left;
+}
+
+    .step-container {
+        position: relative;
+        margin-left: 1.1%;
+        box-shadow: none;
+        -webkit-box-shadow: none;
+}
+
+
+
+
+    #features {
+        text-align: center;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 20px;
+        padding-bottom: 50px;
+        border-bottom: 1px solid lightgrey;
+        clear: both;
+}
+
+    #hometabs {
+        background-color: #272264;
+}
+
+        #hometabs:first-child {
+            padding-top: 12px;
+}
+
+.btn-primary {
+    background-color: #07A8B5;
+}
+
+    .home-panels-1 {
+    border-radius: 6px;
+        border: none;
+}
+
+    .home-panels-2 {
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+        box-shadow: 2px 2px 7px;
+}
+
+    .home-panels-shad {
+        box-shadow: 1px 1px 5px;
+    border-radius: 6px;
+        height: 32px !important;
+}
+
+.panel-heading {
+        background-color: #8292A5;
+        color: white;
+}
+
+    .panel p {
+    margin: 10px;
+}
+
+    .homeDescrip {
+        height: 70px;
+}
+
+    .panel {
+        border-radius: 0;
+        border: 0;
+}
+
+.intro {
+    position: relative;
+    left: 0;
+    top: 0;
+        height: 480px;
+    overflow: hidden;
+}
+
+#mainLogo {
+        margin-top: 16px;
+        margin-left: 20px;
+}
+
+    .contentTitle {
+        text-align: left;
+        margin-top: 24px;
+    position: relative;
+    margin-left: 12px;
+        padding-left: 15px;
+}
+
+
+    .carousel {
+        padding-right: 0;
+        overflow: hidden;
+        width: 100%;
+        height: 400px;
+}
+
+
+.carousel-indicators li {
+        border: 1px solid #89a4c4;
+}
+
+    .carousel-indicators .active {
+        background-color: #89a4c4;
+}
+
+    .carousel-indicators {
+    margin-bottom: -7px;
+}
+
+    #happyShoppers {
+        float: left;
+        display: inline-block;
+        padding-left: 0;
+        border: 0;
+        max-width: 50%;
+        max-height: 50%;
+}
+
+#bottom-images-wrapper {
+        overflow: hidden;
+    display: table;
+        position: relative;
+        margin-top: 50px;
+}
+
+
+/*************Dashboard**************/
+
+.dashpanel {
+        margin-bottom: 75px;
+}
+
+    textarea.reviewdisclaimer {
+        margin-top: 15px;
+        max-width: 100%;
+        width: 100%;
+        color: #272264;
+        resize: none;
+        font-style: italic;
+}
+
+    #help-modal-button {
+        margin: 15px;
+        font-weight: bold;
+}
+
+    .textareabox textarea {
+        max-width: 100%;
+        width: 95%;
+}
+
+    .emailbox input {
+        width: 250px;
+}
+
+
+
+    hr {
+        clear: both;
+}
+
+
+    .dashboard-tab-description {
+        font-weight: bold;
+        font-size: 1.2em;
+        margin-bottom: 15px;
+}
+
+    .discountcode {
+        font-weight: bold;
+}
+
+    .codedisplay {
+        color: red;
+        font-weight: bold;
+        font-size: 1.2em;
+}
+
+    .profile-info {
+    width: 20%;
+    text-align: center;
+    float: left;
+    border: 2px solid black;
+    border-radius: 5px;
+        margin-right: 2%;
+    padding-bottom: 20px;
+}
+
+        .profile-info img {
+    width: 50%;
+    margin: auto;
+    margin-bottom: 20px;
+}
+
+        .profile-info .progress {
+    width: 90%;
+    margin: auto;
+}
+
+.dashboard-title {
+    width: 25%;
+    float: left;
+}
+
+    .product-alert {
+    float: left;
+    border: 1px solid black;
+}
+
+        .product-alert .revieweditempanel, .review-alert {
+    width: 95%;
+    float: left;
+    margin-top: 20px;
+}
+
+    .recommended-items-slider {
+    border: 2px double black;
+    border-radius: 5px;
+        width: 20%;
+    height: 250px;
+    float: left;
+    list-style: none;
+    display: inline-block;
+    margin-left: 5%;
+    margin-top: 2em;
+}
+
+        .recommended-items-slider img {
+    margin: auto;
+            width: auto;
+            height: 100%;
+}
+
+    .productNameCarousel {
+    color: blue;
+}
+
+
+.products li {
+    float: left;
+    margin-left: 2.5%;
+   margin-top: 20px;
+}
+
+.revieweditempanel {
+        text-align: center;
+        margin: 5px;
+}
+
+    div.reviewimage {
+        height: 100px;
+}
+
+    .js .panel-heading .panel-title {
+        line-height: 1.5em;
+    height: 3em;
+        overflow: hidden;
+        color: white;
+        text-decoration: none;
+}
+
+.revieweditempanel .panel-heading .panel-title a:hover {
+    text-decoration: none;
+}
+
+    .revieweditempanel img {
+        max-height: 100px;
+        max-width: 100px;
+}
+
+    .panel-heading {
+    background-color: #07A8B5;
+}
+
+    .overdue {
+        font-weight: bold;
+        color: red;
+}
+
+    .js .btn-default {
+        margin-bottom: 20px;
+}
+
+/*************Products Page**************/
+.product-top {
+    text-align: center;
+    border-bottom: 1px solid;
+    margin-bottom: 20px;
+        padding-bottom: 10px;
+    color: #89a4c4;
+}
+
+    .product-top h2, .product-top h3 {
+    color: #89a4c4;
+}
+
+    #productsearchbutton {
+        margin-left: 25px;
+}
+
+    .productimagebox {
+        height: 40%;
+        overflow: hidden;
+}
+
+    .panel-default {
+        border-radius: 10px;
+}
+
+    .productimagebox a img {
+        padding: 5px;
+        max-height: 100%;
+        max-width: 100%;
+}
+
+
+.productbox {
+        text-align: center;
+        height: 395px;
+        box-shadow: 3px 5px 5px grey;
+        border-radius: 20px 20px;
+        border: 1px solid #89a4c4;
+}
+
+    .panel-body {
+        padding: 2px 5px 5px 2px;
+}
+
+div.category {
+        font-size: .85em;
+        line-height: 1em;
+        height: 1em;
+        overflow: hidden;
+        text-align: left;
+        padding-left: 15px;
+        padding-right: 15px;
+    margin: 1px;
+        background-color: #ccc;
+}
+
+    hr.category-top {
+        padding: 0;
+        margin-bottom: 1px;
+}
+
+    hr.category-bottom {
+        padding: 0;
+        margin-top: 1px;
+}
+
+    div.itemtitle {
+    line-height: 1.15em;
+    height: 3.5em;   
+        font-weight: bold;
+    overflow: hidden;
+}
+
+    p.productprice {
+        font-weight: bold;
+        font-size: 1.5em;
+}
+
+    p.productdiscount {
+        font-size: 1.2em;
+}
+
+    a.btn-product {
+        max-width: 90%;
+        padding: 5px;
+    margin-top: 8px;
+   }
+
+    .btn-view-amazon {
+        max-width: 90%;
+        white-space: normal;
+        margin-bottom: 15px;
+}
+
+.modal-dialog {
+    min-width: 80%;
+        margin-right: auto;
+        margin-left: auto;
+}
+
+    .modal-img {
+    max-height: 95%;
+    max-width: 95%;
+}
+
+    .modal {
+        background-color: rgba(130,146,165,.5);
+}
+
+    .modal-content {
+        font-weight: bold;
+        margin-left: auto;
+        margin-right: auto;
+        height: 80%;
+}
+
+.modal-header {
+        text-align: center;
+}
+
+    .modal-body {
+        text-align: left;
+        max-height: 70vh;
+        overflow-y: auto;
+}
+
+
+
+    button.btn-review-submit {
+        margin-top: 30px;
+        font-weight: bold;
+        margin-bottom: 30px;
+}
+
+
+.formmessage {
+        clear: both;
+        margin-bottom: 0;
+        margin-top: 15px;
+}
+
+td.modal-description {
+        vertical-align: top;
+        width: 50%;
+}
+
+    h1.specialprice {
+        color: darkblue;
+        margin: 0.50em 0;
+}
+
+
+/*************FAQ**************/
+
+    .faq-logo {
+        max-height: 100px;
+        margin: 25px;
+}
+
+#accordion .panel-default .panel-heading {
+    background-color: #07A8B5;
+    color: white;
+        font-size: 1.5em;
+}
+
+    #accordion .panel-default .panel-body {
+        background-color: #eee;
+        color: #444;
+    font-size: 1.1em;
+        padding: 15px;
+}
+
+    .faq-img img {
+    max-height: 600px;
+    width: 100%;
+}
+
+/*************Footer**************/
+#footer-padding {
+    height: 80px;
+        width: 110%;
+        background-color: #272264;
+        margin-left: -20px;
+        margin-right: -20px;
+    bottom: 25px;
+    left: 0;
+}
+
+    footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+    background: #333;
+	color: #eee;
+	font-size: 11px;
+        text-align: right;
+	padding: 5px;
+        margin-bottom: 0;
+}
+
+
+/*********** Campaign Detail Pages *************/
+#detailpage {
+        max-width: 45%;
+        margin-top: 25px;
+}
+
+    .btn-lookup {
+        margin-top: 25px;
+}
+
+    .btn-mod-campaign {
+        margin-right: 25px;
+}
+
+div.campaigncustomers {
+        clear: both;
+        min-height: 400px;
+}
+
+    div.headinfo {
+        text-align: right;
+        padding-top: 25px;
+}
+
+    div.campaignsummary {
+        text-align: left;
+}
+
+    div.campaignalert {
+        text-align: center;
+}
+
+    th.statsmaincol {
+    width: 20%;
+}
+
+.statstable {
+        text-align: center;
+        align-content: center;
+}
+
+        .statstable > tbody > tr:last-child {
+            font-weight: bold;
+            background-color: #7296eb;
+}
+
+    table.statstable td {
+        text-align: center;
+        align-content: center;
+}
+
+    div.statsheader {
+        text-align: center;
+        font-weight: bold;
+}
+
+    .btn-reopen {
+        margin-left: 25px;
+}
+
+    #discount {
+        margin-top: 8px;
+        color: darkblue;
+        font-weight: bold;
+}
+
+    #totalDiscount {
+        margin-top: 8px;
+        color: darkblue;
+        font-weight: bold;
+}
+
+    .btn-actions {
+    margin: 3px !important;
+    padding: 5px;
+}
+
+    .btn-confirm-code {
+    margin: 3px;
+}
+
+
+/*********** Create a Campaign Pages *************/
+
+    div.asindisplay {
+        font-weight: bold;
+        padding-top: 7px;
+}
+
+    #retailprice {
+        padding-top: 8px;
+}
+
+    #vendorId {
+        padding-top: 8px;
+}
+
+div.newcampaign {
+        padding-top: 5px;
+}
+
+tr:nth-child(even) {
+    background-color: #e0e0e0;
+}
+
+
+
+    .campaignsearch {
+        text-align: right;
+        margin: 15px 0 15px 15px;
+}
+
+        .campaignsearch .btn {
+            margin: 5px;
+}
+
+    .camp-search-wrap {
+        float: right;
+}
+
+    select#active.submitonchange {
+        margin-right: 14px;
+}
+
+.productsearch{
+    padding-top:25px;
+    padding-right:25px;
+    text-align:right;
+}
+.productsort{
+    padding-top:33px;
+    text-align:right;
+    color:#444;
+}
+
+.productsearch .btn{
+    margin:5px;
+}
+
+    .productsearch .btn {
+        margin: 5px;
+}
+
+    hr.productpage {
+        margin-top: 0;
+        padding-top: 0;
+    }
+
+    .opencampcheckbox {
+        padding-right: 192px;
+}
+
+
+
+/* Admin Dashboard */
+
+    .admindashboard {
+    height: 125px;
+        text-align: center;
+        padding: 10px;
+        margin: 5px;
+    border: 1px solid #89a4c4;
+    border-radius: 10px;
+        box-shadow: 4px 3px 5px grey;
+}
+
+        .admindashboard div h1 {
+            color: #07A8B5;
+}
+
+table.admintable tr td {
+        white-space: nowrap;
+        overflow: hidden;
+        max-width: 50px;
+}
+
+    .rev-count-row {
+        margin-top: -20px;
+        color: #89a4c4;
+        margin-right: 50px;
+}
+
+/* Customer Details Page*/
+
+    .btn-customer-edit {
+        margin: 15px 0 15px 15px;
+}
+
+/* Seller Page */
+
+    .sellerpricing {
+        text-align: center;
+        min-width: 400px;
+}
+
+
+
+.sellerpricing th {
+            font-size: 1.5em;
+            width: 50%;
+}
+
+.sellerpricing td {
+            font-size: 1.2em;
+}
+
+    .seller-text {
+        margin-top: 50px;
+    font-size: 1.2em;
+        background-color:;
+}
+
+    .sellerimg img {
+        max-width: 100%;
+        max-height: 100%;
+}
+
+
+    #requestBox {
+        color: white;
+        border: 0;
+        border-radius: 8px;
+        width: 55%;
+        margin-bottom: 2%;
+}
+
+
+/* Success Page */
+    #success-conf {
+    color: white;
+        position: fixed;
+        font-size: 20px;
+    background: #272264; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(#272264, #07A8B5); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#272264, #07A8B5); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#272264, #07A8B5); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#272264, #07A8B5); /* Standard syntax */
+        padding-top: 100px;
+        padding-left: 20px;
+        padding-right: 15px;
+        margin-top: -27px;
+        margin-left: -25px;
+        margin-right: -30px;
+        margin-bottom: -10px;
+        height: 100%;
+        width: 100%;
+}
+
+
+
+/* Create Order Page */
+
+#textQty {
+        padding-top: 8px;
+}
+
+#photoQty {
+        padding-top: 8px;
+}
+
+#videoQty {
+        padding-top: 8px;
+}
+
+
+/* Seller Landing Page */
+
+    #seller-cover {
+    background: #272264; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(#272264, #07A8B5); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#272264, #07A8B5); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#272264, #07A8B5); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#272264, #07A8B5); /* Standard syntax */
+        margin-top: 0;
+        margin-left: -25px;
+        margin-right: -30px;
+        margin-bottom: -50px;
+        height: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+        padding-bottom: 40px;
+}
+
+    .col-md-1 > input {
+        padding-left: 8px;
+}
+
+    h2, h3, label {
+        font-weight: 300 !important;
+}
+
+    .seller-cover-content {
+        position: relative;
+        color: white;
+        padding-top: 88px;
+        padding-bottom: 40px;
+        text-align: center;
+}
+
+        .seller-cover-content > h1 {
+    letter-spacing: 2px;
+            font-size: 3em;
+            font-weight: 300;
+            margin-bottom: 20px;
+}
+
+    .stars {
+        width: 92px;
+        margin-top: -9px;
+}
+
+    .seller-cover-content > p {
+        font-size: 1.2em;
+}
+
+    .stand-out {
+        font-size: 1.3em;
+}
+
+    div.container.col-sm-8.margin-center.text-center {
+        color: white;
+}
+
+    .margin-center {
+        margin: 0 auto;
+        float: none;
+}
+
+/* Create Order Page*/
+
+    .create-order {
+        overflow: visible;
+        margin-top: 0px;
+        margin-left: -25px;
+        margin-right: -30px;
+        margin-bottom: -30px;
+        height: 100%;
+        padding-top: 20px;
+        padding-left: 20px;
+        padding-right: 20px;
+}
+
+    #new-seller {
+    color: white;
+    background-color: #5cb85c;
+    border-color: #398439;    
+        margin-top: 20px;
+        font-size: 20px;
+}
+
+/* Review Guide */
+
+    .margin-bottom {
+        margin-bottom: 20px;
+}
+
+    .guide-step-header {
+        border-top: 1px solid lightgrey;
+        padding-top: 15px;
+        font-size: 1.6em;
+}
+
+    .guide-step {
+        width: 100%;
+        margin-top: 12px;
+        margin-bottom: 12px;
+}
+
+    .alert-info {
+        height: 112px;
+}
+
+/* Campaign Index Page */
+
+.campindextable tr td {
+        white-space: nowrap;
+        overflow: hidden;
+        max-width: 50px;
+}
+
+/* New Member Welcome Page */
+
+    .comfirmMailMessage {
+    margin-top: 25px;
+    font-size: 1.2em;
+        font-weight: 900;
+}
+
+#vendornotesbox {
+    max-width: 100%;
+    width: 100%;
+    height: 150px;
+}
+
+/* Review Pricing Page */
+
+.PricingTable {
+    width: 50%;
+        text-align: center;
+}
+
+.PricingTable tr {
+            height: 50px;
+}
+
+
+
+@media only screen and (max-width: 1263px) {
+        .prodWrap {
+        margin-left: 20px;
+    }
+}
+
+@media only screen and (max-width: 1067px) {
+    #textWrapperTwo p {
+        font-size: 16px;
+    }
+
+    @media only screen and (max-width:991px) {
+        #coverHome {
+            display: none;
+        }
+
+        #mainLogo {
+            width: 60%;
+        }
+
+        .cover-content p {
+            width: 80%;
+        }
+    }
+
+    @media only screen and (max-width: 871px) {
+        .prodWrap {
+            margin-left: 12px;
+        }
+
+        #textWrapperTwo {
+            margin-right: 20px;
+        }
+
+        .prodWrap img {
+            height: 40%;
+        }
+    }
+
+    @media only screen and (max-width: 836px) {
+        #textWrapperTwo p {
+            display: none;
+        }
+
+        #textWrapperTwo h2 {
+            margin-top: 100px;
+        }
+    }
+
+    @media only screen and (max-width: 768px) {
+
+        .prodWrap img {
+            height: 30%;
+        }
+    }
+
+    @media only screen and (min-width: 768px) {
+        .in, collapsing {
+            background-color: #272264;
+        }
+    }
+
+    @media only screen and (max-width: 743px) {
+        #textWrapperTwo {
+            display: none;
+        }
+
+        .prodWrap {
+            width: 30%;
+        }
+
+        @media only screen and (max-width: 568px) {
+            #features {
+                padding-top: 19px;
+                padding-bottom: 49px;
+            }
+
+            .intro {
+                height: 400px;
+            }
+        }
+
+        @media only screen and (max-width: 511px) {
+            #requestBox {
+                width: 70%;
+            }
+
+            /* Vendor Add/Edit Pages */
+
+
+            }
+        }
+    }
+@media only screen and (max-width: 1330px) {
+    .prodWrap img {
+        max-width: 90%;
+    }
+}
+
+    @media only screen and (max-width: 502px) {
+        .row.text-center .fb-connect {
+            margin-top: 10px;
+        }
+    }
+
+    @media only screen and (max-width: 767px) {
+            #ASIN {
+                margin: 0 auto;
+        }
+    }
+
+    @media only screen and (max-width: 883px) {
+        .homeDescrip {
+            height: 90px;
+        }
+    }
+
+    @media only screen and (max-width: 767px) {
+        .homeDescrip {
+            height: 50px;
+        }
+    }
+
+    @media only screen and (max-width: 400px) {
+        .homeDescrip {
+            height: 75px;
+        }
+        }
+
+    @media only screen and (max-width: 767px) {
+        .home-panels-2 {
+            margin-top: 50px;
+    }
+}

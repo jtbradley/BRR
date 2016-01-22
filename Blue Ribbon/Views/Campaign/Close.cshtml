@@ -1,0 +1,158 @@
+﻿@model Blue_Ribbon.Models.Campaign
+
+@{
+    ViewBag.Title = "Close Campaign";
+}
+<div class="mainContent">
+    <h2>End Campaign</h2>
+    <div class="alert alert-danger">
+        <strong>
+            <ul>
+            <li>Closing campaign will remove item from products page. Customers will no longer see deal. </li>
+            <li>Current customer requests remain open until you accept or decline.</li>
+             <li>Customers who have been selected can still use discount code they were given.</li>
+            </ul>
+        </strong>
+    </div>
+    <h2>Are you sure you want to close this Campaign?</h2>
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.ASIN)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ASIN)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CampaignID)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CampaignID)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Vendor)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Vendor.Name)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Category)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Category)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.StartDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.StartDate)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Discount)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Discount)
+            </dd>
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Close" class="btn btn-danger" /> 
+            </div>
+            @Html.ActionLink("Back to List", "Index")
+        }
+
+        <hr />
+        <div class="campaigncustomers">
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#selectedusers" aria-controls="home" role="tab" data-toggle="tab">Selected Customers</a></li>
+                <li role="presentation"><a href="#userrequests" aria-controls="profile" role="tab" data-toggle="tab">Customer Requests</a></li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="selectedusers">
+                    <h3>Selected Customers</h3>
+                    <table class="table">
+                        <tr>
+                            <th>Customer ID</th>
+                            <th>Selected Date</th>
+                            <th>Review Type</th>
+                            <th>Reviewed</th>
+                            <th>Product Rating</th>
+                            <th>Review Date</th>
+                        </tr>
+                        @foreach (var item in Model.Reviews)
+            {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CustomerID)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SelectedDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ReviewTypeExpected)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Reviewed)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ProductRating)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ReviewDate)
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="userrequests">
+                    <h3>Customers Requests</h3>
+                    <table class="table">
+                        <tr>
+                            <th>Open Request</th>
+                            <th>Customer ID</th>
+                            <th>Request Date</th>
+                            <th>Review Type</th>
+
+                        </tr>
+                        @foreach (var item in Model.ItemRequests)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ActiveRequest)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CustomerID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.RequestDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ReviewType)
+                            </td>
+
+                        </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>

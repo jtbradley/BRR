@@ -1,0 +1,93 @@
+﻿@model Blue_Ribbon.Models.Review
+
+@{
+    ViewBag.Title = "Review Complete Override";
+}
+
+<h2>Mark Review Complete</h2>
+<p>
+    @Html.ActionLink("Back to Open Reviews", "Index")
+</p>
+<div>
+    <hr />
+    <div class="alert alert-info">
+        <div class="row">
+            <div class="col-sm-8">
+                Do you wish to mark this review as completed? 
+                <ul>
+                <li>Customer will receive credit for completed review. </li>
+                <li>Avg word count and product rating will affect customer's stats.</li>
+                <li>Review Date will be marked as today.</li>
+                </ul>
+            </div>
+            <div class="col-sm-4">
+                @Html.ActionLink("Mark Complete", "CloseConfirmed", "Review", new { id = Model.ReviewID }, new { @class = "btn btn-lg btn-warning" })
+            </div>
+        </div>
+    </div>
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CampaignID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CampaignID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Campaign.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Campaign.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SelectedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SelectedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Reviewed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Reviewed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductRating)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductRating)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReviewDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ReviewDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerAlert)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerAlert)
+        </dd>
+
+    </dl>
+</div>
+

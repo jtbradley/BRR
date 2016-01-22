@@ -1,0 +1,179 @@
+﻿@model Blue_Ribbon.Models.PricingStructure
+@{
+    ViewBag.Title = "Create Order";
+}
+<script>
+    var current = @Html.Raw(Json.Encode(Model));
+</script>
+
+
+<div id="seller-cover">
+    <div class="seller-cover-content">
+        <h1 class="text-center">Blue Ribbons Review Sellers</h1>
+
+        <p>Get the reviews you need to make your products<i><span class="stand-out"> stand out</span></i>.</p>
+        <img class="stars" src="~/images/5-star.png" />
+    </div>
+
+
+
+    <div class="container col-sm-8 margin-center text-center">
+
+    <p style="margin-bottom:40px;">At Blue Ribbons Review, we make it easy for you to get top-quality reviews for your products. You simply choose a review quantity package, provide discount codes, and we do the rest!
+
+Our streamlined system allows us to connect your product with reviewers who have a track-record of providing great, honest reviews that boost your exposure on Amazon.</p>
+
+        <!--
+        <canvas id="myChart" width="256" height="256"></canvas>
+        
+        <script>
+            $(document).ready(function(){
+                // Get context with jQuery - using jQuery's .get() method.
+                var ctx = $("#myChart").get(0).getContext("2d");
+            
+                var data = [
+        {
+            value: 300,
+            color:"#F7464A",
+            highlight: "#FF5A5E",
+            label: "Red"
+        },
+        {
+            value: 50,
+            color: "#46BFBD",
+            highlight: "#5AD3D1",
+            label: "Green"
+        },
+        {
+            value: 100,
+            color: "#FDB45C",
+            highlight: "#FFC870",
+            label: "Yellow"
+        }
+                ];
+
+                var chart = new Chart(ctx).Doughnut(data);
+            });
+        </script>
+            -->
+
+        <hr />
+        <p style="font-size:20px">New Sellers Get Special Introductory Offers</p>
+        <h3>
+            New Sellers Click
+            @Html.ActionLink("HERE", "Seller", "Home", null, new { @id = "new-seller", @class = "btn btn-sm btn-default" })
+        </h3>
+
+        <hr />
+@if (User.IsInRole("seller") || User.IsInRole("campaignManager"))
+{
+        <h2>Create Order</h2>
+        <p style="font-size:20px">
+            We offer 3 price levels
+            <a data-toggle="modal" data-target="#priceLevelsModal" style="color:white;cursor:pointer;font-size:.75em;">[?]</a>
+        </p>
+
+        <!-- Price Levels Modal -->
+        <div class="modal fade" id="priceLevelsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content" style="color:#444">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Review Packages</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>101+ reviews -- BEST VALUE</p>
+                        <p>51-100 reviews -- Great Value</p>
+                        <p>1-50 Reviews -- Standard Value</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Got it!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        using (Html.BeginForm("CreateOrder", "Seller"))
+        {
+            <div class="col-sm-6">
+
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-md-offset-6 col-md-2">
+                            Review Quantity
+                        </div>
+                        <div class="col-md-2">
+                            Price
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("How many Reviews would you like!", htmlAttributes: new { @class = "control-label col-md-6" })
+                        <div class="col-md-2">
+                            @Html.TextBox("textReviews", null, new { @class = "reviewQty", @placeholder = "0", @style="width:50px;" })
+                        </div>
+                        <div class="col-md-2">
+                            <div id="textReviewsPrice">$0</div>
+                        </div>
+
+                    </div>
+                            </div>
+                            </div>
+
+            <div class="col-sm-6">
+                <div class="form-horizontal">
+                        <div class="form-group">
+                        <div class="margin-center">
+                            <h2>
+                                <label class="control-label" for="ASIN">ASIN</label>
+                                <!-- Button trigger modal -->
+                                <a data-toggle="modal" data-target="#whatModal" style="color:white;cursor:pointer;font-size:0.5em;">
+                                    [?]
+                                </a>
+                            </h2>
+                            <input class="form-control text-box single-line" id="ASIN" name="ASIN" type="text" value="" placeholder="Enter ASIN found in Product Description" />
+
+
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="whatModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content" style="color:#444">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="myModalLabel">What is ASIN?</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>
+                                                The ASIN(Amazon Standard Identification Number) is a unique identifier needed when locating products listed on Amazon.
+                                                It can be found on the Amazon product page by scrolling down to the "Product Details" section. Simply copy this value and paste it into the field.
+                                            </p>
+                                            <img src="~/images/how-asin.png"/>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Got it!</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        
+                        </div>
+
+                    <input type="submit"  value="Get Started!" class="btn btn-success btn-lookup" style="margin-bottom:150px;"/>
+                    </div>
+                </div>
+            </div>
+
+
+        }
+        }
+        
+    </div>
+
+</div>
+
+

@@ -1,0 +1,42 @@
+﻿Alex's Amazon Account
+email: alex@blueribbonsreview.com
+Password: blueribbons
+
+Product Advertising API: (stored in AppConfigKeys.config file under App_Data)
+Associate ID: bluribrev-20
+Access Key: AKIAJS3VL4HC4UOSUY5Q
+Secret Key: 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
+
+Azure Account Login:
+email:  alex@arezzinimarketing.com
+password:  blazers1
+
+SQL Server Login (Azure):
+U: alex
+P: Blazers1!
+
+Virtual Machine Admin Login (to add TFS users):
+U: arezzini
+P: Blazers1!
+
+TFS Settings:
+URL: blueribbon.cloudapp.net
+Port: 8085
+You can login with Virtual Machine Admin login (above) or use:
+Username: developer
+Password: Blazers1!
+
+
+mailgun API Information
+Mailgun is an API for sending email. It handles delivery better than we can, and up to 10,000 messages/month are free.
+https://mailgun.com/app/dashboard
+Dashboard shows real-time delivery stats for email. Cooooool!!!
+API Keys in Config file with Amazon Keys
+
+Login Email: alex@blueribbonsreview.com
+Password: Blazers1!
+
+Paypal API
+Username: alex_api1.blueribbonsreview.com
+Password: ME8WMQS2RG4LXQSN
+Signature: AFcWxV21C7fd0v3bYYYRCpSSRl31Ai9a8dBS8PwZ5D0knbmO2QaKZTN4

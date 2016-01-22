@@ -1,0 +1,231 @@
+﻿<div class="body-content">
+
+    @model IEnumerable<Blue_Ribbon.Models.Campaign>
+
+
+    @{
+        ViewBag.Title = "Home Page";
+    }
+
+
+    <section class="intro">
+        <!-- Full Page Image Background Carousel Header -->
+        <header id="myCarousel" class="carousel slide">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+            </ol>
+
+            <!-- Wrapper for Slides -->
+            <div class="carousel-inner">
+                <div class="item active">
+                    <!-- Set the first background image using inline CSS below. -->
+                    <div class="fill ">
+                        <div class="row" id="slideOne">
+
+                            <div class="col-md-5 cover-content">
+                                <div class="row contentTitle">
+
+                                    <img src="~/images/br_logo.png" alt="Blue Ribbon Logo" width="80%" id="mainLogo" />
+
+                                    <h2>
+                                        Review Products.<br />
+                                        Receive Discounts.
+                                    </h2>
+                                    <p>
+                                        Blue Ribbons Review is your source for free and discounted Amazon products in exchange for an honest review.
+                                        Our goals is to provide the generous sellers with high quality reviews of their products and reward you
+                                        with unbeatable deals on great products!
+                                    </p>
+                                </div>
+
+                            </div>
+                            <img src="~/images/coverHomeWhiteCropped.png" alt="Shop Happy" id="coverHome" />
+
+                        </div>
+                    </div>
+                    <div class="carousel-caption">
+                        <h2></h2>
+                    </div>
+                </div>
+
+                <div class="item">
+                    <a href="/Product">
+                        <!-- Set the second background image using inline CSS below. -->
+                        <div class="fill " style="background-color:white;">
+                            <div class="row" id="slideTwo">
+
+                                <div class="productWrapper col-xs-11">
+
+                                    <div id="textWrapperTwo" class="col-xs-2">
+                                        <h2>Check out these deals!</h2>
+                                        <p>Here are some great deals our partners have listed:</p>
+                                    </div>
+                                    @foreach (var item in Model)
+                                    {
+                                        <div class="prodWrap col-xs-3">
+                                            <img src="@item.ImageUrl" alt="@item.Name" />
+                                            <div class="itemtitle">@item.Name</div>
+                                            <h1 class="specialprice">
+                                                @item.displayAsCurrency(item.SalePriceNumerical)
+                                            </h1>
+                                            <div class="productdiscount">
+                                                @{ int discount = Convert.ToInt32((item.CalculatedDiscount / double.Parse(item.RetailPrice)) * 100);}
+                                                @*(@item.Discount off!)<br />*@
+                                                (@discount% off!)<br />
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+
+
+        </header>
+
+
+
+
+        <div class="col-md-5 cover-content" id="cc2">
+            <div class="row contentTitle">
+
+                <img src="~/images/br_logo.png" alt="Blue Ribbon Logo" width="80%" id="mainLogo" />
+
+                <h2>
+                    Review Products.<br />
+                    Receive Discounts.
+                </h2>
+                <p>
+                    Blue Ribbons Review is your source for free and discounted Amazon products in exchange for an honest review.
+                    Our goals is to provide the generous sellers with high quality reviews of their products and reward you
+                    with unbeatable deals on great products!
+                </p>
+            </div>
+
+        </div>
+
+
+
+
+
+
+    </section>
+
+    <div id="how-to-wrapper" class=" col-sm-12">
+
+        <h2>How It Works</h2>
+        <div class="panel col-sm-4 row step-container">
+            <img src="~/images/brl.gif" class="ribbon-steps" />
+            <h3 class="step-header">Login or Signup </h3>
+            <p class="step-p">Login, or register to create an account.</p>
+        </div>
+
+        <div class="panel col-sm-4 row step-container">
+            <img src="~/images/brl2.gif" class="ribbon-steps" />
+            <h3 class="step-header">Find a product</h3>
+            <p class="step-p">Choose a product from our selection of great deals.</p>
+        </div>
+
+        <div class="panel col-sm-4 row step-container">
+            <img src="~/images/brl3.gif" class="ribbon-steps" />
+            <h3 class="step-header">Write a review</h3>
+            <p class="step-p">Leave a text, photo, or video review. See our @Html.ActionLink("Reviewer Guide", "Welcome", "Dashboard").</p>
+        </div>
+
+    </div>
+
+    <div class="row" id="features">
+        <div class="col-sm-4 feature">
+            <div class="panel">
+                <div class="panel-heading home-panels-2" id="hometabs">
+                    <h3 class="panel-title" id="hometabs">Shop at a Discount.</h3>
+                </div>
+                <img src="~/images/go_shopping1.jpg" alt="HTML5" />
+
+                <p class="homeDescrip">
+                    Our partners are eager to connect with consumers like you. You'll be surprised what is available!
+                </p>
+                <p class="home-panels-shad">
+                    @Html.ActionLink("Browse Current Products", "Index", "Product", null, new { @class = "btn btn-primary btn-block home-panels-1" })
+                </p>
+
+            </div>
+        </div>
+        <div class="col-sm-4 feature">
+            <div class="panel">
+                <div class="panel-heading home-panels-2" id="hometabs">
+                    <h3 class="panel-title" id="hometabs">Become a Seller.</h3>
+                </div>
+                <img src="~/images/your_product_crop.png" alt="HTML5" />
+
+                <p class="homeDescrip">
+                    Need quality Amazon reviews? Simply offer your product at a discounted price.
+                </p>
+                <p class="home-panels-shad">
+                    @Html.ActionLink("See Sellers Page", "Seller", "Home", null, new { @class = "btn btn-primary btn-block home-panels-1" })
+                </p>
+            </div>
+        </div>
+        <div class="col-sm-4 feature">
+            <div class="panel">
+                <div class="panel-heading home-panels-2" id="hometabs">
+                    <h3 class="panel-title" id="hometabs">Contact Us.</h3>
+                </div>
+                <img src="~/images/contact_img1.jpg" alt="HTML5" />
+
+                <p class="homeDescrip">
+                    Contact us with any questions or concerns. We are happy to help.
+                </p>
+                <p class="home-panels-shad">
+                    @Html.ActionLink("See Contact Page", "Contact", "Home", null, new { @class = "btn btn-primary btn-block home-panels-1" })
+                </p>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+
+    @section Scripts{
+
+        @*Social Buttons on this page*@
+        <script src="@Url.Content("~/Scripts/SocialInit.js")"></script>
+
+        <!-- Script to Activate the Carousel -->
+        <script>
+            $('.carousel').carousel({
+                interval: 6500 //changes the speed
+            })
+
+            // responsive carousel
+
+            $(window).on('resize', function () {
+                if ($("#features").css("padding-top") == "19px") {
+                    $("#myCarousel").hide("fast");
+
+                }
+                else if ($("#features").css("padding-top") == "20px") {
+                    $("#myCarousel").show("fast");
+                }
+                else if ($("#features").css("padding-bottom") == "49px") {
+                    $("#cc2").show("fast");
+                }
+            });
+            $(document).ready(function () {
+                $(window).trigger('resize');
+            });
+
+
+        </script>
+    }
+
+
+
+
+
+

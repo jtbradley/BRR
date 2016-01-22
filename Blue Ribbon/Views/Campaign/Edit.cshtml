@@ -1,0 +1,219 @@
+﻿@model Blue_Ribbon.Models.Campaign
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div class="mainContent">
+    <h2>Confirm Product</h2>
+
+    @using (Html.BeginForm("Edit", "Campaign"))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.CampaignID)
+        @Html.HiddenFor(model => model.ASIN)
+        @Html.HiddenFor(model => model.RetailPrice)
+        @Html.HiddenFor(model => model.Name)
+        @Html.HiddenFor(model => model.Category)
+        @Html.HiddenFor(model => model.Description)
+        @Html.HiddenFor(model => model.ImageUrl)
+        @Html.HiddenFor(model => model.StartDate)
+
+
+        <div class="form-horizontal">
+            <div class="row">
+                <div class="col-sm-8">
+                    <h4>Product</h4>
+                    @Html.ActionLink("Back to List", "Index")
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <input type="submit" value="Update Campaign!" class="btn btn-success pull-right" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row">
+                <div class="col-sm-12 col-md-4">
+
+                    <div class="row">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ASIN, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8 asindisplay">
+                                @Html.DisplayFor(model => model.ASIN)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Vendor, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.DropDownList("VendorID", null, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group">
+                            @Html.Label("Amazon Price", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8" id="retailprice">
+                                @Html.DisplayFor(model => model.RetailPrice)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            @Html.Label("Current Discount", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8" id="discount">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.SalePrice, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.SalePrice, new { htmlAttributes = new { @class = "form-control", id = "salepricebox" } })
+                                @Html.ValidationMessageFor(model => model.SalePrice, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+
+                        <div class="form-group">
+                            @Html.Label("Text Reviews", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.TextGoal, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.TextGoal, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            @Html.Label("Photo Reviews", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.PhotoGoal, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.PhotoGoal, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            @Html.Label("Video Reviews", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.VideoGoal, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.VideoGoal, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            @Html.Label("Discount Codes", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.TextArea("discountcodes",(string) ViewBag.DiscountCodes, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-sm-12 col-md-8">
+
+                    <div class="row">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.VendorsPurchaseURL, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.VendorsPurchaseURL, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.VendorsPurchaseInstructions, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.TextAreaFor(model => model.VendorsPurchaseInstructions, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.DailyLimit, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.DailyLimit, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group">
+                            @Html.Label("Acceptable Review Types", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.CheckBoxFor(model => model.TextValid, new { htmlAttributes = new { @class = "form-control" } }) - Text Reviews<br />
+                                @Html.CheckBoxFor(model => model.PhotoValid, new { htmlAttributes = new { @class = "form-control" } }) - Photo Reviews<br />
+                                @Html.CheckBoxFor(model => model.VideoValid, new { htmlAttributes = new { @class = "form-control" } }) - Video Reviews<br />
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr />
+                        <h2>Product Details from Amazon.com</h2>
+                        <div class="form-group">
+                            <dl class="dl-horizontal">
+
+                                <dt>
+                                    Amazon.com Link
+                                </dt>
+                                <dd>
+                                    <a href=@String.Format("http://www.amazon.com/dp/{0}/",Html.DisplayFor(model => model.ASIN)) target="_blank">See on Amazon! <span class="glyphicon glyphicon-new-window"></span></a>
+                                </dd>
+                                <dt>
+                                    Retail Price:
+                                </dt>
+
+                                <dd>
+                                    $@Html.DisplayFor(model => model.RetailPrice)
+                                </dd>
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Name)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.Name)
+                                </dd>
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Category)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.Category)
+                                </dd>
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Description)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.Description)
+                                </dd>
+                                <dt>
+                                    Image
+                                </dt>
+
+                                <dd>
+                                    <img src=@Model.ImageUrl id="detailpage" />
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+
+
+        </div>
+
+    }
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+</div>

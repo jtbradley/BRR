@@ -1,0 +1,20 @@
+﻿@model Blue_Ribbon.ViewModels.ReviewOrderViewModel
+
+@{
+    ViewBag.Title = "Review Order";
+}
+
+
+<div class="create-order text-center">
+    <br />
+    <h1>Review Order</h1>
+    <h3>Order: @Model.PaypalComment</h3>
+    <h3>Price: @Model.TotalPrice</h3>
+    <h3>Total Reviews purchased: @Model.TotalReviews</h3>
+    <br />
+    <p>Product: @Model.Campaign.Name</p>
+    <hr />
+    <a href="@Model.PaypalURL"><img src="~/images/paypalButton.png" style="max-width:15%" /></a>
+</div>
+
+

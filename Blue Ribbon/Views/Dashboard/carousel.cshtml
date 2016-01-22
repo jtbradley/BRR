@@ -1,0 +1,91 @@
+﻿
+@model IEnumerable<Blue_Ribbon.Models.Campaign>
+@* This section-The carousel, should pull data from a partial view. each "item" div tag should pull a set of products with different tags*@
+
+
+<div id="dashboard-carousel" class="carousel slide header" data-ride="carousel">
+    <div class="carousel-inner" role="listbox">
+
+        @{int count = 0; }
+        <div class="item active">
+            @foreach (var item in Model)
+            {
+                if (count < 4)
+                {
+
+                        <div class="recommended-items-slider">
+                            <img class ="dashCarousel" src="@item.ImageUrl"><br />
+                            <div class="productNameCarousel">
+                                @item.Name
+                            </div>
+                        </div>
+
+                    count++;
+                }
+                if (count == 4) { break; }
+            }
+         </div>
+        <div class="item">
+            @{count= 0;}
+            @foreach(var item in Model)
+            { 
+                if ((count > 3) && (count < 8))
+                {
+
+                    <div class="recommended-items-slider">
+                        <img class ="dashCarousel" src="@item.ImageUrl"><br />
+                        <div class="productNameCarousel">
+                            @item.Name
+                        </div>
+                    </div>
+
+                    count++;
+                }
+                else
+                {
+                    count++;
+                }
+                if (count == 8) { break; }
+
+
+            }
+         </div>
+        <div class="item">
+            @{count = 0;}
+            @foreach (var item in Model)
+            {
+                if ((count > 7) && (count < 12))
+                {
+
+                    <div class="recommended-items-slider">
+                        <img class ="dashCarousel" src="@item.ImageUrl"><br />
+                        <div class="productNameCarousel">
+                            @item.Name
+                        </div>
+                    </div>
+
+                    count++;
+                }
+                else
+                {
+                    count++;
+                }
+                if (count == 12) { break; }
+
+
+            }
+        </div>
+
+    </div>
+         
+                <a class="left carousel-control" href="#dashboard-carousel" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#dashboard-carousel" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+
+      

@@ -1,0 +1,83 @@
+﻿@model Blue_Ribbon.ViewModels.SellerFormViewModel
+@{
+    ViewBag.Title = "Seller";
+}
+
+<div id="seller-cover">
+    <div class="col-sm-4 sellerimg margin-center">
+        <img src="~/images/br_logo_white_text.png" />
+    </div>
+
+<div class="row">
+
+
+
+    <div class="col-sm-12 col-md-7 margin-center" id="requestBox">
+        <h2 class="text-center" style="margin-bottom:30px;">Request Additional Information</h2>
+        <div id="sellerformdiv">
+            @using (@Html.BeginForm("SellerForm", "Home", FormMethod.Post, new { @id = "sellerform" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="row form-group">
+                    @Html.LabelFor(model => model.ContactName, "Name", htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.TextBoxFor(model => model.ContactName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ContactName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="row form-group">
+                    @Html.LabelFor(model => model.CompanyName, "Company Name", htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.TextBoxFor(model => model.CompanyName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.CompanyName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div class="row form-group">
+                    @Html.LabelFor(model => model.Phone, "Phone (optional)", new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.TextBoxFor(model => model.Phone, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div class="row form-group">
+                    @Html.LabelFor(model => model.ProductLink, "Amazon Product Link (optional)", htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.TextBoxFor(model => model.ProductLink, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ProductLink, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    @Html.LabelFor(model => model.Message, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.TextAreaFor(model => model.Message, new { @class = "form-control", style = "float:left" })
+                        @Html.ValidationMessageFor(model => model.Message, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div class="form-group row text-center">
+                    <button type="button" class="btn btn-primary" id="sellerformsubmit">Send Message</button>
+                </div>
+            }
+        </div>
+
+    </div>
+
+</div>
+
+</div>

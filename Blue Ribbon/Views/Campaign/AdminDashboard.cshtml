@@ -1,0 +1,289 @@
+﻿
+@model Blue_Ribbon.ViewModels.AdminDashboardViewModel
+
+@{
+    ViewBag.Title = "AdminDashboard";
+}
+
+            
+            <div class="product-top">
+                <h2>Admin Dashboard</h2>
+            </div>
+
+
+        <div class="row rev-count-row">
+            <div class="pull-left">
+                <h4>@Html.ActionLink(String.Format("Notification Log ({0})",Model.NotificationsToday),"Notifications")</h4>
+            </div>
+            <div class="pull-right">
+                <h3>Review Count: @Model.TotalReviewsDone!</h3>
+            </div>
+        </div>
+
+
+
+
+    <div class="row">
+
+        <div class="col-sm-2 admindashboard">
+            <div>
+                Codes Needed
+                <h1>@Model.CodesNeeded</h1>
+            </div>
+            @Html.ActionLink("Respond Now", "Index", "Campaign", new { sortOrder = "codes_desc", active = "all" }, null) <span class="glyphicon glyphicon-arrow-right"></span>
+        </div>
+        <div class="col-sm-2 admindashboard">
+            <div>
+                Requests Waiting
+                <h1>@Model.ActiveRequests</h1>
+            </div>
+            @Html.ActionLink("Respond Now", "Index", "Campaign", new { sortOrder = "requests_desc", active = "all" }, null) <span class="glyphicon glyphicon-arrow-right"></span>
+        </div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-2 admindashboard">
+            <div>
+                Registered Customers
+                <h1>@Model.Customers</h1>
+            </div>
+        </div>
+        <div class="col-sm-2 admindashboard">
+            <div>
+                Active Campaigns
+                <h1>
+                    @Model.OpenCampaigns
+                </h1>
+            </div>
+        </div>
+        <div class="col-sm-2 admindashboard">
+            <div>
+                Vendors:
+                <h1>@Model.Vendors</h1>
+            </div>
+        </div>
+    </div>
+    <h2>Top 5 Campaigns</h2>
+    <a href="/Campaign/Index">Go to all Campaigns <span class="glyphicon glyphicon-arrow-right"></span></a>
+    <table class="table admintable">
+        <tr>
+            <th class="col-sm-1">
+                Item Requests
+            </th>
+            <th class="col-sm-1">
+                Codes Needed
+            </th>
+            <th class="col-sm-1">
+                Reviews Needed
+            </th>
+            <th class="col-sm-1">
+                Open Reviews
+            </th>
+            <th class="col-sm-1">
+                Reviews Completed
+            </th>
+            <th class="col-sm-1">
+                Open Campaign
+            </th>
+            <th class="col-sm-1">
+                Price
+            </th>
+            <th class="col-sm-1">
+                Vendor
+            </th>
+            <th class="col-sm-3">
+                Product
+            </th>
+            <th class="col-sm-1">
+            </th>
+        </tr>
+
+        @foreach (var item in Model.TopActiveCampaigns.Campaigns)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OpenRequests)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CodesNeeded)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReviewsStillNeeded)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OpenReviews)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CompletedReviews)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Campaign.OpenCampaign)
+                </td>
+                <td>
+                    @item.Campaign.displayAsCurrency(item.Campaign.SalePriceNumerical)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Campaign.Vendor.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Campaign.Name)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", "Campaign", new { id = item.Campaign.CampaignID }, null)
+                </td>
+            </tr>
+        }
+
+    </table>
+    <hr />
+    <h2>Top 5 Reviewers</h2>
+    <a href="/Customer/Index">Go to all Reviewers <span class="glyphicon glyphicon-arrow-right"></span></a>
+    <table class="table admintable">
+        <tr>
+            <th class="col-sm-2">
+                Amazon ID
+            </th>
+            <th class="col-sm-2">
+                Name
+            </th>
+            <th class="col-sm-1">
+                Days Being Member
+            </th>
+            <th class="col-sm-1">
+                Total Requests
+            </th>
+            <th class="col-sm-1">
+                Completed Reviews
+            </th>
+            <th class="col-sm-1">
+                Open Reviews
+            </th>
+            <th class="col-sm-1">
+                Photo Reviews
+            </th>
+            <th class="col-sm-1">
+                Video Reviews
+            </th>
+            <th class="col-sm-1">
+                Avg. Rating
+            </th>
+            <th class="col-sm-1">
+                Avg. Word Count
+            </th>
+            <th class="col-sm-1">
+
+            </th>
+        </tr>
+
+        @foreach (var item in Model.TopReviewers.Customers)
+        {
+            <tr>
+                <td>
+                    <a href="@item.Customer.generateURL()" target="_blank">@Html.DisplayFor(model => item.Customer.CustomerID)</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Customer.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Customer.DaysBeingMember)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalRequests)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CompletedReviews)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OpenReviews)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhotoReviews)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VideoReviews)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AvgProductRating)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AvgWordCount)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Details", "Details", "Customer", new { id = item.Customer.CustomerID }, null)
+                </td>
+            </tr>
+        }
+    </table>
+    <hr />
+    <h2>Top 5 Vendors</h2>
+    <a href="/Vendor/Index">Go to all Vendors <span class="glyphicon glyphicon-arrow-right"></span></a>
+    <table class="table">
+        <tr>
+            <th>
+                Vendor Name
+            </th>
+            <th>
+                Total Reviews
+            </th>
+            <th>
+                Open Reviews
+            </th>
+            <th>
+                Completed Reviews
+            </th>
+            <th>
+                Total Campaigns
+            </th>
+            <th>
+                Open Campaigns
+            </th>
+            <th>
+                Completed Campaigns
+            </th>
+            <th>
+                Avg Product Rating
+            </th>
+            <th>
+                Avg Review Length
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.TopVendors.Vendors)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.vendor.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalReviews)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OpenReviews)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CompletedReviews)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalCampaigns)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OpenCampaigns)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CompletedCampaigns)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AvgProductRating)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AvgWordCount)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", "Vendor", new { id = item.vendor.VendorId }, null)
+                </td>
+            </tr>
+        }
+
+    </table>
+
+

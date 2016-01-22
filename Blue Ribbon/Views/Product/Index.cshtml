@@ -1,0 +1,168 @@
+﻿
+
+    @model IEnumerable<Blue_Ribbon.Models.Campaign>
+
+    @{
+        ViewBag.Title = "Find a Deal!";
+        var sortList = new List<SelectListItem>
+    {
+        new SelectListItem {Text = "Price - Lowest First", Value = "priceAsc" },
+        new SelectListItem {Text = "Price - Highest First", Value = "priceDesc" },
+        new SelectListItem {Text = "Newest First", Value = "ageAsc" },
+        new SelectListItem {Text = "Oldest First", Value = "ageDesc" },
+        new SelectListItem {Text = "Category - A to Z", Value = "categoryAsc" },
+        new SelectListItem {Text = "Category - Z to A", Value = "categoryDesc" }
+    };
+    }
+
+
+
+    <div class="row product-top">
+        <div class="col-sm-4 text-left">
+            <h2>Score a Deal!</h2>
+        </div>
+        @using (Html.BeginForm("Index", "Product", FormMethod.Get))
+        {
+        <div class="col-sm-4 productsort">
+            Sort Order: @Html.DropDownList("sortOrder", sortList)
+        </div>
+        <div class="col-sm-4 productsearch">
+            @Html.TextBox("productsearch", ViewBag.SearchBox as string, new { style = "width:200px" })
+            <input type="submit" value="Search" class="btn btn-primary" />
+            @Html.ActionLink("Reset", "Index", null, htmlAttributes: new { @class = "btn btn-default" })
+        </div>
+        }
+    </div>
+
+    @foreach (var item in Model)
+    {
+        <div class="productitem col-lg-2 col-md-3 col-sm-4 col-xs-6">
+            <div class="panel panel-default">
+                <div class="panel-body productbox">
+                    <div class="productimagebox">
+                        <a data-target="#@item.ASIN" role="button" data-toggle="modal"><img src=@item.ImageUrl /></a>
+                    </div>
+                    <hr class="category-top" />
+                    <div class="category">
+                        @item.Category
+                    </div>
+                    <hr class="category-bottom" />
+                    <div class="itemtitle">
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </div>
+                    <h1 class="specialprice">
+                        @item.displayAsCurrency(item.SalePriceNumerical)
+                    </h1>
+                    <p class="productdiscount">
+                        @{ int discount = Convert.ToInt32((item.CalculatedDiscount / double.Parse(item.RetailPrice))*100);}
+                        @*(@item.Discount off!)<br />*@
+                        (@discount% off!)<br />
+                        <a data-target="#@item.ASIN" role="button" data-toggle="modal" class="btn btn-primary btn-product">See Details!</a>
+                    </p>
+
+                    <div class="modal fade" id="@item.ASIN">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button class="close" data-dismiss="modal">&times;</button>
+                                    <h4>@item.Name</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-md-4 col-sm-12 ">
+
+                                            <img class="modal-img" src=@item.ImageUrl />
+                                        </div>
+                                        <div class="col-md-8 col-sm-12">
+                                            <p>
+                                                Regular Price: $@item.RetailPrice<br />
+                                                Reviewer Discount: @item.Discount
+                                            </p>
+                                            <p>
+                                                <h1 class="specialprice">@item.displayAsCurrency(item.SalePriceNumerical)</h1>
+                                                <hr />
+                                            </p>
+                                            @if (User.Identity.IsAuthenticated == false)
+                                            {
+                                            <div>
+                                                <p>
+                                                    To request this product, please login:
+                                                </p>
+                                                <p>
+                                                    @Html.ActionLink("Login Page", "Login", "Account", null, htmlAttributes: new { @class = "btn btn-warning" })
+                                                </p>
+
+                                            </div>
+                                            }
+                                            else
+                                            {
+                                            <div class="reviewform" id="@String.Concat(@item.ASIN, "Form")">
+                                                @using (Html.BeginForm("SubmitRequest", "Product", FormMethod.Post))
+                                                    {
+                                                    <input type="hidden" id="@String.Concat(@item.ASIN, "userid")" class="start" value="@User.Identity.Name" />
+                                                    <input type="hidden" id="@String.Concat(@item.ASIN, "campaignid")" value="@item.CampaignID" />
+
+                                                    <p>
+                                                        <strong>
+                                                            I agree to give my honest and unbiased review in exchange for the products discounted price. I will compete my review on Amazon.com within 14 days of purchasing this item and leave a full discloser that I received product discount in exchange for a review per Amazon’s Terms of Service.
+                                                        </strong>
+                                                    </p>
+                                                    <p>
+                                                        <strong>
+                                                            If selected to receive this discount, I agree to complete a  @Html.DropDownList(@String.Concat(@item.ASIN, "reviewtype"), item.GetReviewTypes()) review.
+                                                        </strong>
+                                                    </p>
+                                                    if (item.DailyLimitReached == true)
+                                                    {
+                                                        <button type="button" class="btn btn-success pull-right btn-review-submit" disabled id=@String.Concat(@item.ASIN, "Request")>Daily Stock Gone! Check Back Tomorrow!</button>
+                                                    }
+                                                    else
+                                                    {
+                                                        <button type="button" class="btn btn-success pull-right btn-review-submit" id=@String.Concat(@item.ASIN, "Request")>Send Request!</button>
+                                                    }
+
+                                                }
+                                            </div>
+                                            <div class="formmessage" id="@String.Concat(@item.ASIN, "FormMessage")">
+                                                <hr />
+                                                <div class="alert alert-success" role="alert" id="@String.Concat(@item.ASIN, "Alert")"></div>
+                                            </div>
+                                            }
+                                            <hr style="clear:both" />
+                                            <h3>Description from Amazon.com</h3>
+                                            <p>
+                                                @item.Description
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer">
+                                    @*Customer asked to keep link of modal to prevent too many visitors to product page resulting in poor conversion rate.*@
+                                    @*<a href="@item.AmazonUrl" target="_blank" class="btn btn-default btn-view-amazon pull-left" style="align-content:center">View product on Amazon! <span class="glyphicon glyphicon-new-window"></span></a>*@
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <style type="text/css">
+            #footer-padding {
+                display: none;
+            }
+        </style>
+
+    }
+
+
+    @section Scripts{
+
+        @*Social Buttons on this page*@
+        <script src="@Url.Content("~/Scripts/SocialInit.js")"></script>
+    }

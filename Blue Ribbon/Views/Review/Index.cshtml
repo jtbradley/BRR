@@ -1,0 +1,93 @@
+﻿@model IEnumerable<Blue_Ribbon.Models.Review>
+
+@{
+    ViewBag.Title = "Open Reviews";
+}
+
+<div class="row">
+    <h2 class="product-top">Open Reviews</h2>
+    <div class="margin-bottom">
+        @Html.ActionLink("Check All Reviews", "CheckAllReviews", "Campaign", null, new { @class = "btn btn-sm btn-danger" })<br />
+        <b>All Reviews Last Checked: @ViewBag.DateStamp</b><br />
+    </div>
+        <p><i>
+        Note: System will automatically check for completed reviews a couple times per day. You can force a check now with button, but will take several minutes to process.      
+    </i></p>
+
+    @using (Html.BeginForm("Index", "Review", FormMethod.Get))
+    {
+        <div class="row campaignsearch text-right">
+
+            <div class="col-sm-12">
+                @Html.TextBox("currentSearch", ViewBag.SearchBox as string, new { style = "width:200px" })
+                <input type="submit" value="Search" class="btn btn-primary" />
+                @Html.ActionLink("Reset", "Index", null, htmlAttributes: new { @class = "btn btn-default" })<br />
+                @Html.CheckBox("showAll", false) Show all Open Reviews (longer load time)
+            </div>
+        </div>
+    }
+</div>
+
+<table class="table">
+    <tr>
+        <th class="col-sm-1">Customer ID</th>
+        <th class="col-sm-1">Customer Name</th>
+        <th class="col-sm-1">Selected Date</th>
+        <th class="col-sm-1">Review Type</th>
+        <th class="col-sm-1">Days Open</th>
+        <th class="col-sm-1">Product Rating</th>
+        <th class="col-sm-1">Word Count</th>
+        <th class="col-sm-1">Review Date</th>
+        <th class="col-sm-2">Flag</th>
+        <th class="col-sm-2">Actions</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(@item.CustomerID, "Details", "Customer", new { @id = item.CustomerID }, null)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Customer.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SelectedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReviewTypeExpected)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DaysToReview)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductRating)
+            </td>
+            <td>
+                @if (item.ReviewLength > 0)
+                {
+                    @Html.DisplayFor(modelItem => item.ReviewLength)
+                }
+            </td>
+            <td>
+                @if (item.ReviewLink != null)
+                {
+                    <a href="@item.ReviewLink" target="_blank">@item.ReviewDate</a>
+                }
+                else
+                {
+                    @Html.DisplayFor(modelItem => item.ReviewDate)
+                }
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerAlert)
+            </td>
+            <td>
+                @Html.ActionLink("Mark Complete", "Close", new { id = item.ReviewID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ReviewID })
+            </td>
+        </tr>
+        }
+
+    </table>

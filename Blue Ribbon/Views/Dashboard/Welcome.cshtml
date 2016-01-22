@@ -1,0 +1,108 @@
+﻿
+
+@{
+    ViewBag.Title = "Guide to Blue Ribbons Review!";
+}
+@if (ViewBag.Message != null)
+{
+
+        <div class="alert alert-danger comfirmMailMessage">
+            <p>
+                @ViewBag.Message
+            </p>
+        </div>
+        }
+        <h2>Guide to Blue Ribbons Review!</h2>
+        <hr />
+        <div class="row">
+            <div class="col-sm-7">
+                <div class=" alert alert-info">
+                    <div class="fb-like" data-href="https://www.facebook.com/blueribbonsreview" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+                </div>
+                <h4 class="margin-bottom">
+                    Welcome to the all-new home of Blue Ribbons Review. Our goal is to bring you the best deals available in exchange for your
+                    honest review! It's fun and easy!
+                </h4>
+
+                <h4 class="guide-step-header">First Step: Go Shopping!</h4>
+                <p>
+                    Visit the @Html.ActionLink("Products Page", "Index", "Product") to see all the available deals. We're adding more all the time, but as the
+                    discounts run out, they'll be removed from the page, so act fast!
+                </p>
+                <p>
+                    When you find an item that you're insterested in, simply choose the type of reivew you're willing to do (text, photo, or video), and
+                    click "Send Request!". Then we'll know you're interested in this great deal.
+                    <img class="guide-step step-1" src="~/images/step1.png" />
+                </p>
+                <h4 class="guide-step-header">I've been selected. Now what?</h4>
+                <p>
+                    When you're chosen to receive a deal, you should automatically receive an email with a link to the the product on Amazon.com and the
+                    discount code needed to purchase at the low price you saw. If for some reason you don't receive the email or you lose it, don't worry!
+                    Your @Html.ActionLink("Dashboard", "Index", "Dashboard") includes the same information.
+                    <img class="guide-step step-2" src="~/images/step2.png" />
+                    <i>
+                        Keep in mind, you need to purchase the
+                        item within 24 hours and use the Amazon account you signed up with.
+                    </i>
+                </p>
+                <h4 class="guide-step-header">OK, Review Time!</h4>
+                <p>
+                    Great! We hope you loved the item, but most important is that you write an honest review that is helpful to other people. Also, every
+                    review you write must meet the following criteria:
+                </p>
+                <p><b>
+                    <ul>
+                        <li>
+                            Include comment: <i>"I received this product discounted in exchange for my honest and unbiased review.”</i>
+                        </li>
+                        <li>
+                            Be a verified purchase. You must use the Amazon account you used when you joined Blue Ribbons Review.
+                        </li>
+                        <li>
+                            Be at least 70 words long.
+                        </li>
+                    </ul>
+                    </b>
+
+                </p>
+                <p>
+                    Your @Html.ActionLink("Dashboard", "Index", "Dashboard") includes a link to the item where you write your review. Please be sure to
+                    write your review within 14 days of being selected to be a reviewer for that item.
+                </p>
+                <img class="guide-step step-3" src="~/images/step3.png" />
+
+                <h4 class="guide-step-header">What happens after I've reviewed something?</h4>
+                <p>
+                    Our sophisticated platform can automatically detect when you've written your review on Amazon! Our platform can also confirm that
+                    it was a "Verfied Purchase", how long the review was, if it included a photo or video, and when the review was completed.
+                    When our system marks your review as complete, the notification will be removed from the "Open Reviews" category on your dashboard
+                    to the "Completed Reviews" category.
+                    <img class="guide-step step-4" src="~/images/step4.png" />
+                </p>
+                <p>
+                    Remember: the better the review quality, the more likely you'll receive future deals!
+                </p>
+                <h4 class="guide-step-header">I need some assistance.</h4>
+                <p>
+                    If you are having an issue, please use the "Contact Help Desk" button on your @Html.ActionLink("Dashboard", "Index", "Dashboard") and
+                    we'll check it out as quick as possible!
+                </p>
+            </div>
+            <div class="col-sm-5">
+                <div>
+                    <img src="~/images/br_logo.png" class="modal-img" />
+                </div>
+                <hr />
+                <div class="text-center">
+                    @Html.ActionLink("Find Deals Now!", "Index", "Product", null, new { @class = "btn btn-lg btn-primary" })
+                </div>
+            </div>
+        </div>
+
+       
+
+        @section Scripts{
+
+            @*Social Buttons on this page*@
+            <script src="@Url.Content("~/Scripts/SocialInit.js")"></script>
+        }

@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Blue_Ribbon.Models.NotificationLog>
+
+@{
+    ViewBag.Title = "Application Notifications";
+}
+
+<h2>Notifications</h2>
+@Html.ActionLink("Back to Admin Dashboard","AdminDashboard")
+<table class="table">
+    <tr>
+        <th class="col-sm-1">Timestamp</th>
+        <th class="col-sm-5">Product</th>
+        <th class="col-sm-5">Message</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.LogTimestamp)
+            </td>
+            <td>
+                @Html.ActionLink(item.Campaign.Name, "Details", "Campaign", new { @id = item.CampaignID }, null)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Message)
+            </td>
+        </tr>
+    }
+
+</table>

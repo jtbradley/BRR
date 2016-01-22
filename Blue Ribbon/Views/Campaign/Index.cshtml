@@ -1,0 +1,121 @@
+﻿@model Blue_Ribbon.ViewModels.CampaignIndexViewModel
+
+@{
+    ViewBag.Title = "Open Campaigns";
+
+}
+<div class="row product-top">
+    <div class="col-sm-8 margin-center">
+        <h2>Campaigns</h2>
+        <b>Daily Limits Checked/Reset: @ViewBag.DateStamp</b>
+    </div>
+</div>
+
+<div class="col-sm-5 col-md-2 newcampaign">
+    @Html.ActionLink("Start New Campaign", "Create", null, htmlAttributes: new { @class = "btn btn-success" })
+</div>
+
+
+@if (Model.AlertRequests > 0)
+{<text>
+    <div class="alert alert-danger">
+        <strong>Activity Alert: You have customer requests.</strong>
+    </div>
+</text>
+}
+    @if (Model.AlertCodes > 0)
+    {<text>
+        <div class="alert alert-danger">
+            <strong>Activity Alert: You have customers who need discount codes.</strong>
+        </div>
+    </text>
+}
+@using (Html.BeginForm("Index", "Campaign", FormMethod.Get))
+{
+    <div class="row campaignsearch">
+        
+
+        <div class="col-sm-8 camp-search-wrap">
+
+                @Html.DropDownList("active", Model.ActiveClosedSelector, new { @class = "submitonchange" })
+            
+
+            @Html.TextBox("currentSearch", ViewBag.SearchBox as string, new { style = "width:200px" })
+            <input type="submit" value="Search" class="btn btn-primary" />
+            @Html.ActionLink("Reset", "Index", null, htmlAttributes: new { @class = "btn btn-default" })
+        </div>
+    </div>
+}
+
+<table class="table campindextable">
+    <tr>
+        <th class="col-sm-1">
+            @Html.ActionLink("Current Requests", "Index", new { sortOrder = ViewBag.Requests, currentSearch = ViewBag.SearchBox })
+        </th>
+        <th class="col-sm-1">
+            @Html.ActionLink("Codes Needed", "Index", new { sortOrder = ViewBag.Codes, currentSearch = ViewBag.SearchBox })
+        </th>
+        <th class="col-sm-1">
+            @Html.ActionLink("Reviews Needed", "Index", new { sortOrder = ViewBag.ReviewsNeeded, currentSearch = ViewBag.SearchBox })
+        </th>
+        <th class="col-sm-1">
+            Reviews Done
+        </th>
+        <th class="col-sm-1">
+            Open Reviews
+        </th>
+        <th class="col-sm-1">
+            Open Campaign
+        </th>
+        <th class="col-sm-1">
+            ASIN
+        </th>
+        <th class="col-sm-1">
+            @Html.ActionLink("Vendor", "Index", new { sortOrder = ViewBag.Vendor, currentSearch = ViewBag.SearchBox })
+        </th>
+        <th class="col-sm-3">
+            Product
+        </th>
+        <th class="col-sm-1">
+        </th>
+    </tr>
+
+    @foreach (var item in Model.Campaigns)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OpenRequests)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CodesNeeded)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReviewsStillNeeded)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompletedReviews)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OpenReviews)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Campaign.OpenCampaign)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Campaign.ASIN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Campaign.Vendor.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Campaign.Name)
+            </td>
+            <td>
+
+                @Html.ActionLink("Details", "Details", new { id = item.Campaign.CampaignID })
+
+            </td>
+        </tr>
+    }
+
+</table>

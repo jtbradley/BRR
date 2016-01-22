@@ -1,0 +1,93 @@
+﻿@using Blue_Ribbon.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Log in";
+}
+
+<h2>@ViewBag.Title.</h2>
+<div class="row">
+    <div class="col-md-6">
+        <section id="loginForm">
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <h4>Use a local account to log in.</h4>
+                if (ViewBag.Message != null)
+                {
+                    <div class="alert alert-danger comfirmMailMessage">
+                        <p>
+                            @ViewBag.Message
+                        </p>
+                    </div>
+                }
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <div class="checkbox">
+                            @Html.CheckBoxFor(m => m.RememberMe)
+                            @Html.LabelFor(m => m.RememberMe)
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Log in" class="btn btn-lg btn-primary" />
+                        @Html.ActionLink("Change/Reset Password", "ForgotPassword", "Account", null, new { @class = "btn btn-default", @id = "btn-pass-reset" })
+                    </div>
+                </div>
+                <hr />
+                <h2><b>New Users</b></h2>
+            <p>@Html.ActionLink("Register as a new user", "Register", null, new { @class = "btn btn-warning" })</p>
+            }
+        </section>
+    </div>
+
+    <style type="text/css">
+        #footer-padding {
+            display: none;
+        }
+    </style>
+
+    <div class="col-md-6">
+        <h4>Login/Register with your Facebook Account</h4>
+        <p>
+            <i>
+                We won't post to your wall.<br />
+                One less password to remember.
+            </i>
+        </p>
+        <section id="socialLoginForm">
+            @if (ViewBag.SocialMessage != null)
+            {
+                <div class="alert alert-danger comfirmMailMessage">
+                    <p>
+                        @ViewBag.SocialMessage
+                    </p>
+                </div>
+            }
+            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+        </section>
+    </div>
+
+    <img id="go_shopping" src="~/images/go_shopping.jpg" alt="image cannot be displayed" />
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

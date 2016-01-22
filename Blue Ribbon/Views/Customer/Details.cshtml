@@ -1,0 +1,154 @@
+﻿@model Blue_Ribbon.Models.Customer
+
+@{
+    ViewBag.Title = "Details";
+}
+<div class="row">
+    <div class="col-sm-8">
+        <h2>Details</h2>
+        <p>
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+    </div>
+    <div class="col-sm-4 newcampaign">
+        @Html.ActionLink("Modify Permissions", "ModifyPermissions","Account", new { customerID = Model.CustomerID }, htmlAttributes: new { @class = "btn btn-warning" })<br />
+        @Html.ActionLink("Edit Details", "Edit", "Customer", new { id = Model.CustomerID }, htmlAttributes: new { @class = "btn btn-info btn-customer-edit" })
+    </div>
+</div>
+<hr />
+<div>
+    <h4>Customer</h4>
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerID)
+        </dt>
+        <dd>
+            <a href="@Model.generateURL()" target="_blank">@Html.DisplayFor(model => model.CustomerID)</a>
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.JoinDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JoinDate)
+        </dd>       
+    </dl>
+    <hr />
+    <h4>Activity</h4>
+            <div class="customeractivity">
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#reviewactivity" aria-controls="home" role="tab" data-toggle="tab">Customer Reviews</a></li>
+                <li role="presentation"><a href="#reviewrequests" aria-controls="profile" role="tab" data-toggle="tab">Customer Requests</a></li>
+            </ul>
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="reviewactivity">
+                    <h4>Review Activity</h4>
+                    <table class="table">
+                        <tr>
+                            <th>ASIN</th>
+                            <th>Product ASIN</th>
+                            <th>Selected Date</th>
+                            <th>Review Type</th>
+                            <th>Reviewed</th>
+                            <th>Review Length</th>
+                            <th>Product Rating</th>
+                            <th>Review Date</th>
+                        </tr>
+                        @foreach (var item in Model.Reviews)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Campaign.ASIN)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Campaign.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SelectedDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ReviewTypeExpected)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Reviewed)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ReviewLength)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ProductRating)
+                                </td>
+                                <td>
+                                    @if (item.ReviewLink != null)
+                                    {
+                                        <a href="@item.ReviewLink" target="_blank">@item.ReviewDate</a>
+                                    }
+                                    else
+                                    {
+                                        @Html.DisplayFor(modelItem => item.ReviewDate)
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="reviewrequests">
+                    <h3>Customers Requests</h3>
+                    <table class="table admintable">
+                        <tr>
+                            <th class="col-sm-1">Active Request</th>
+                            <th class="col-sm-1">Selected</th>
+                            <th class="col-sm-4">Product</th>
+                            <th class="col-sm-1">Request Date</th>
+                            <th class="col-sm-1">Review Type</th>
+
+                        </tr>
+                        @foreach (var item in Model.Requests)
+                        {
+                            <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ActiveRequest)
+                            </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Selected)
+                                </td>
+                            <td>
+                                @Html.ActionLink(item.Campaign.Name, "Details", "Campaign", new { id = item.CampaignID }, null)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.RequestDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ReviewType)
+                            </td>
+
+                        </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+

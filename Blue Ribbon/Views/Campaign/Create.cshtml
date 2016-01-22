@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "Create New Campaign";
+}
+<div class="mainContent">
+    <h2>Start a New Campaign</h2>
+    @Html.ActionLink("Back to List", "Index")
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <hr />
+            <div class="form-group">
+                <h2><label class="control-label" for="ASIN">ASIN</label></h2>
+                <input class="form-control text-box single-line" id="ASIN" name="ASIN" type="text" value="" />
+                <input type="submit" value="Lookup Product" class="btn btn-success btn-lookup" />
+            </div>
+        </div>        
+    }
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+
+</div>
